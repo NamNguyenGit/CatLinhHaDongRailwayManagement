@@ -35,6 +35,9 @@ public class UserDAOImplement implements UserDAO{
                 User U1 = new User();
                 U1.setId(rs.getInt("ID"));
                 U1.setName(rs.getString("Name"));
+                U1.setDob(rs.getString("dob"));
+                U1.setGender(rs.getString("gender"));
+                U1.setPhone(rs.getString("phone"));
                 U1.setRole(rs.getInt("Role"));
                 U1.setUsername(rs.getString("Username"));
                 listUser.add(U1);
@@ -70,6 +73,9 @@ public class UserDAOImplement implements UserDAO{
                 User d1 = new User();
                 d1.setId(rs.getInt("ID"));
                 d1.setName(rs.getString("Name"));
+                d1.setDob(rs.getString("dob"));
+                d1.setGender(rs.getString("gender"));
+                d1.setPhone(rs.getString("phone"));
                 d1.setRole(rs.getInt("Role"));
                 d1.setUsername(rs.getString("Username"));
                 listUser.add(d1);
