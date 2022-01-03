@@ -15,14 +15,14 @@ public class User {
     private String Dob;
     private String Gender;
     private String Phone;
-    private String Role;
+    private int Role;
     private String Username;
     private String Password;
 
     public User() {
     }
 
-    public User(int Id, String Name, String Dob, String Gender, String Phone, String Role, String Username, String Password) {
+    public User(int Id, String Name, String Dob, String Gender, String Phone, int Role, String Username, String Password) {
         this.Id = Id;
         this.Name = Name;
         this.Dob = Dob;
@@ -73,11 +73,11 @@ public class User {
         this.Phone = Phone;
     }
 
-    public String getRole() {
+    public int getRole() {
         return Role;
     }
 
-    public void setRole(String Role) {
+    public void setRole(int Role) {
         this.Role = Role;
     }
 
@@ -96,6 +96,8 @@ public class User {
     public void setPassword(String Password) {
         this.Password = Password;
     }
+
+   
     
     
 }
