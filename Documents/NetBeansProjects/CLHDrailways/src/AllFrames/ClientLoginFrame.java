@@ -115,7 +115,7 @@ public class ClientLoginFrame extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
-        WelcomeFrame WF = new WelcomeFrame();
+        ChooseTicketFrame WF = new ChooseTicketFrame();
         WF.show();
         dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
