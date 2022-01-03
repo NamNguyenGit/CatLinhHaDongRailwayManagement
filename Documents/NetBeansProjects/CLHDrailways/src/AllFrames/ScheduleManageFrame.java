@@ -13,6 +13,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import Entities.Schedule;
 import DAOImplement.ScheduleDAOimplement;
+import Entities.User;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -25,8 +26,10 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
     /**
      * Creates new form ScheduleManageFrame
      */
+    private static User user;
     DefaultTableModel defaultTableModel;
-    public ScheduleManageFrame() {
+    public ScheduleManageFrame(User user) {
+        ScheduleManageFrame.user = user;
          try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
@@ -494,7 +497,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
-        AdminHomeFrame AHF = new AdminHomeFrame(null);
+        AdminHomeFrame AHF = new AdminHomeFrame(ScheduleManageFrame.user);
         AHF.show();
         dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
@@ -628,14 +631,12 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        String IDS = IDD.getText().trim();
+        int IDS = Integer.parseInt(IDD.getText().trim());
         String Train_id = TrainID.getText().trim();
         String Departuret = Departure.getText().trim();
         String Destinationt = Destination.getText().trim();
         String DeparturetT = DepartureTime.getText().trim();
         String DeparturetD = DepartureDate.getText().trim();
-        
-        
         String error = "";
         int Train_ID = 0;
         if(Train_id.length()==0){
@@ -661,14 +662,13 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         if (error.length() == 0) {
             Schedule s1 = new Schedule();
             s1.setTrain_id(Train_ID);
-            s1.setTrain_id(Train_ID);
             s1.setDeparture(Departuret);
             s1.setDestination(Destinationt);
             s1.setDeparture_time(DeparturetT);
             s1.setDeparture_date(DeparturetD);
             
-            
-            boolean bl = new ScheduleDAOimplement().updateSchedule(s1);
+            System.out.println(s1.toString());
+            boolean bl = new ScheduleDAOimplement().updateSchedule(s1,IDS);
             if (bl){
                 JOptionPane.showMessageDialog(null, "Update successful");
                 btn_listall.doClick();
@@ -728,7 +728,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ScheduleManageFrame().setVisible(true);
+                new ScheduleManageFrame(ScheduleManageFrame.user).setVisible(true);
             }
         });
     }

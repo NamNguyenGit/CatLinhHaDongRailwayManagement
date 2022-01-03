@@ -27,8 +27,10 @@ public class UserManageFrame extends javax.swing.JFrame {
     /**
      * Creates new form ScheduleManageFrame
      */
+    private static User user;
     DefaultTableModel defaultTableModel;
-    public UserManageFrame() {
+    public UserManageFrame(User user) {
+        UserManageFrame.user = user;
          try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
@@ -479,7 +481,7 @@ public class UserManageFrame extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
-        AdminHomeFrame AHF = new AdminHomeFrame(null);
+        AdminHomeFrame AHF = new AdminHomeFrame(UserManageFrame.user);
         AHF.show();
         dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
@@ -618,7 +620,7 @@ public class UserManageFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserManageFrame().setVisible(true);
+                new UserManageFrame(UserManageFrame.user).setVisible(true);
             }
         });
     }

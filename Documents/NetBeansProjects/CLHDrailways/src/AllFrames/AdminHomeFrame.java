@@ -5,12 +5,14 @@
  */
 package AllFrames;
 
+import DAOImplement.UserDAOImplement;
 import Entities.User;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -265,21 +267,22 @@ public class AdminHomeFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        UserManageFrame UMF = new UserManageFrame();
+        UserManageFrame UMF = new UserManageFrame(AdminHomeFrame.user);
         UMF.show();
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        ScheduleManageFrame SMF = new ScheduleManageFrame();
+         
+        ScheduleManageFrame SMF = new ScheduleManageFrame(AdminHomeFrame.user);
         SMF.show();
         dispose();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        TrainManageFrame TMF = new TrainManageFrame();
+        TrainManageFrame TMF = new TrainManageFrame(AdminHomeFrame.user);
         TMF.show();
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed

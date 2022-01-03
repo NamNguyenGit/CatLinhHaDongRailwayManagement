@@ -80,5 +80,10 @@ public class Schedule {
         this.Departure_date = Departure_date;
     }
 
+    @Override
+    public String toString() {
+        return "Schedule{" + "Id=" + Id + ", Train_id=" + Train_id + ", Departure=" + Departure + ", Destination=" + Destination + ", Departure_time=" + Departure_time + ", Departure_date=" + Departure_date + '}';
+    }
+
     
 }

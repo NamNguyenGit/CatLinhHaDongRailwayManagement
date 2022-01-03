@@ -17,6 +17,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import Entities.Train;
 import DAOImplement.TrainDAOImplement;
+import Entities.User;
 /**
  *
  * @author acer
@@ -26,8 +27,10 @@ public class TrainManageFrame extends javax.swing.JFrame {
     /**
      * Creates new form ScheduleManageFrame
      */
+    private static User user;
     DefaultTableModel defaultTableModel;
-    public TrainManageFrame() {
+    public TrainManageFrame(User user) {
+        TrainManageFrame.user = user;
          try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
@@ -48,7 +51,7 @@ public class TrainManageFrame extends javax.swing.JFrame {
         defaultTableModel.setRowCount(0);
         List<Train> listTrain = new TrainDAOImplement().getlistTrain();
         for (Train S1: listTrain ){
-            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getStatus()};
+            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getStatus() == 1 ? "Dang hoat dong" : "Khong hoat dong"};
             defaultTableModel.addRow(data);
         }
     }
@@ -416,7 +419,7 @@ public class TrainManageFrame extends javax.swing.JFrame {
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
-        AdminHomeFrame AHF = new AdminHomeFrame(null);
+        AdminHomeFrame AHF = new AdminHomeFrame(TrainManageFrame.user);
         AHF.show();
         dispose();
     }//GEN-LAST:event_jLabel1MouseClicked
@@ -620,7 +623,7 @@ public class TrainManageFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TrainManageFrame().setVisible(true);
+                new TrainManageFrame(TrainManageFrame.user).setVisible(true);
             }
         });
     }

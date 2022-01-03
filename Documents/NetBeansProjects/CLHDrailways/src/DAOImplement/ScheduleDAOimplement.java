@@ -109,7 +109,7 @@ public class ScheduleDAOimplement implements SheduleDAO {
     }
 
     @Override
-    public boolean updateSchedule(Schedule d1) {
+    public boolean updateSchedule(Schedule d1, int id) {
        boolean bl = false;
 
 
@@ -125,7 +125,7 @@ public class ScheduleDAOimplement implements SheduleDAO {
             ps.setString(3,d1.getDestination());
             ps.setString(4,d1.getDeparture_time());
             ps.setString(5,d1.getDeparture_date());
-            ps.setInt(6,d1.getId());
+            ps.setInt(6,id);
             System.out.println(d1.getId());
             int i = ps.executeUpdate();
             

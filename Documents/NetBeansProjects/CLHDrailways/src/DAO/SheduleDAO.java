@@ -15,6 +15,6 @@ public interface SheduleDAO {
     public List<Schedule> getlistSchedule();
     public boolean insertSchedule(Schedule S1);
     public boolean deleteSchedule(int IdSchedule);
-    public boolean updateSchedule(Schedule d1);
+    public boolean updateSchedule(Schedule d1, int id);
     public List<Schedule> getSchedulesbyTrainID(int TrianID);
 }

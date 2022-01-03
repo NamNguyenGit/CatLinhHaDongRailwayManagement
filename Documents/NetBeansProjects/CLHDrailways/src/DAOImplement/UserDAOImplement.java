@@ -1,4 +1,4 @@
-/*
+get
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -121,6 +121,41 @@ public class UserDAOImplement implements UserDAO{
 
         return bl;
     }
+
+    @Override
+    public boolean insertUser(User u1) {
+        boolean bl = false;
+
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        conn = Database_Connect.getConnection();
+        try {
+            ps = conn.prepareStatement("insert into user(name,dob,gender,phone,username,password) values (?,?,?,?,?,?)");
+            ps.setString(1,u1.getName());
+            ps.setString(2,u1.getDob());
+            ps.setString(3,u1.getGender());
+            ps.setString(4,u1.getDeparture_time());
+            ps.setString(5,S1.getDeparture_date());
+          
+
+            int i = ps.executeUpdate();
+            if (i>0){
+                bl = true;
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Database_Connect.closeAll(conn,ps,rs);
+        }
+
+        return bl;
+    }
+
+    
     
     
 }
