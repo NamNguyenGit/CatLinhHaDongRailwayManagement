@@ -85,6 +85,11 @@ public class AdminHomeFrame extends javax.swing.JFrame {
         DATE.setFont(new java.awt.Font("Segoe UI Black", 3, 18)); // NOI18N
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-back-arrow-48.png"))); // NOI18N
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         TIME.setFont(new java.awt.Font("Segoe UI Black", 3, 18)); // NOI18N
         TIME.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -278,6 +283,13 @@ public class AdminHomeFrame extends javax.swing.JFrame {
         TMF.show();
         dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        AdminLoginFrame ALF = new AdminLoginFrame();
+        ALF.show();
+        dispose();
+    }//GEN-LAST:event_jLabel6MouseClicked
 
     /**
      * @param args the command line arguments

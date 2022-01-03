@@ -29,17 +29,16 @@ public class ScheduleDAOimplement implements SheduleDAO {
         
          conn = Database_Connect.getConnection();
         try {
-            ps = conn.prepareStatement("select * from shedule");
+            ps = conn.prepareStatement("select * from schedule");
             rs = ps.executeQuery();
             while (rs.next()){
                 Schedule S1 = new Schedule();
                 S1.setId(rs.getInt("ID"));
                 S1.setTrain_id(rs.getInt("Train_id"));
-                S1.setTrain_status(rs.getInt("Status"));
                 S1.setDeparture(rs.getString("Departure"));
                 S1.setDestination(rs.getString("Destination"));
-                S1.setDeparture_time(rs.getString("Time"));
-                S1.setDeparture_date(rs.getString("Date"));
+                S1.setDeparture_time(rs.getString("Departure_time"));
+                S1.setDeparture_date(rs.getString("Departure_date"));
                 listschedule.add(S1);
             }
         } catch (SQLException e) {
@@ -61,7 +60,7 @@ public class ScheduleDAOimplement implements SheduleDAO {
 
         conn = Database_Connect.getConnection();
         try {
-            ps = conn.prepareStatement("insert into shedule(train_id,departure,destination,departure_time,departure_date) values (?,?,?,?,?)");
+            ps = conn.prepareStatement("insert into schedule(train_id,departure,destination,departure_time,departure_date) values (?,?,?,?,?)");
             ps.setInt(1,S1.getTrain_id());
             ps.setString(2,S1.getDeparture());
             ps.setString(3,S1.getDestination());
@@ -94,7 +93,7 @@ public class ScheduleDAOimplement implements SheduleDAO {
 
         conn = Database_Connect.getConnection();
         try {
-            ps = conn.prepareStatement("delete from shedule where id = ?" );
+            ps = conn.prepareStatement("delete from schedule where id = ?" );
             ps.setInt(1,IdSchedule);
             int i = ps.executeUpdate();
             if (i>0){
@@ -120,14 +119,17 @@ public class ScheduleDAOimplement implements SheduleDAO {
 
         conn = Database_Connect.getConnection();
         try {
-            ps = conn.prepareStatement("UPDATE shedule SET train_id = ? , departure = ? , destination = ?, departure_time = ?, departure_date = ?  WHERE id = ?");
+            ps = conn.prepareStatement("UPDATE schedule SET train_id = ? , departure = ? , destination = ?, departure_time = ?, departure_date = ?  WHERE id = ?");
             ps.setInt(1,d1.getTrain_id());
             ps.setString(2,d1.getDeparture());
             ps.setString(3,d1.getDestination());
             ps.setString(4,d1.getDeparture_time());
             ps.setString(5,d1.getDeparture_date());
-
+            ps.setInt(6,d1.getId());
+            System.out.println(d1.getId());
             int i = ps.executeUpdate();
+            
+            
             if (i>0){
                 bl = true;
             }
@@ -143,9 +145,10 @@ public class ScheduleDAOimplement implements SheduleDAO {
         return bl;
     }
 
+
     @Override
-    public List<Schedule> getDrinksbyTrainID(int TrianID) {
-       List<Schedule> listschedule = new ArrayList<>();
+    public List<Schedule> getSchedulesbyTrainID(int TrianID) {
+        List<Schedule> listschedule = new ArrayList<>();
 
 
         Connection conn;
@@ -163,8 +166,8 @@ public class ScheduleDAOimplement implements SheduleDAO {
                 S1.setTrain_id(rs.getInt("Train_id"));
                 S1.setDeparture(rs.getString("Departure"));
                 S1.setDestination(rs.getString("Destination"));
-                S1.setDeparture_time(rs.getString("Time"));
-                S1.setDeparture_date(rs.getString("Date"));
+                S1.setDeparture_time(rs.getString("Departure_time"));
+                S1.setDeparture_date(rs.getString("Departure_date"));
                 listschedule.add(S1);
 
             }
@@ -177,5 +180,4 @@ public class ScheduleDAOimplement implements SheduleDAO {
 
         return listschedule;
     }
-    
-}
+    }

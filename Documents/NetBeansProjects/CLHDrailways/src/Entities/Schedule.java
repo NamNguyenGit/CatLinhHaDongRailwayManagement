@@ -12,7 +12,6 @@ package Entities;
 public class Schedule {
     private int Id ;
     private int Train_id;
-    private int Train_status;
     private String Departure;
     private String Destination;
     private String Departure_time;
@@ -21,15 +20,16 @@ public class Schedule {
     public Schedule() {
     }
 
-    public Schedule(int Id, int Train_id, int Train_status, String Departure, String Destination, String Departure_time, String Departure_date) {
+    public Schedule(int Id, int Train_id, String Departure, String Destination, String Departure_time, String Departure_date) {
         this.Id = Id;
         this.Train_id = Train_id;
-        this.Train_status = Train_status;
         this.Departure = Departure;
         this.Destination = Destination;
         this.Departure_time = Departure_time;
         this.Departure_date = Departure_date;
     }
+
+    
 
     public int getId() {
         return Id;
@@ -47,13 +47,6 @@ public class Schedule {
         this.Train_id = Train_id;
     }
 
-    public int getTrain_status() {
-        return Train_status;
-    }
-
-    public void setTrain_status(int Train_status) {
-        this.Train_status = Train_status;
-    }
 
     public String getDeparture() {
         return Departure;
