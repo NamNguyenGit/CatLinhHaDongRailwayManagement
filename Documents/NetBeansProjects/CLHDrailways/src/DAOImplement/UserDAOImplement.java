@@ -1,4 +1,4 @@
-get
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -92,7 +92,7 @@ public class UserDAOImplement implements UserDAO{
     }
 
     @Override
-    public boolean updateUser(User d1) {
+    public boolean updateUser(User d1,int id) {
         boolean bl = false;
 
 
@@ -104,6 +104,7 @@ public class UserDAOImplement implements UserDAO{
         try {
             ps = conn.prepareStatement("UPDATE user SET role = ?  WHERE id = ?");
             ps.setInt(1,d1.getRole());
+            ps.setInt(2,id);
           
 
             int i = ps.executeUpdate();
@@ -136,8 +137,8 @@ public class UserDAOImplement implements UserDAO{
             ps.setString(1,u1.getName());
             ps.setString(2,u1.getDob());
             ps.setString(3,u1.getGender());
-            ps.setString(4,u1.getDeparture_time());
-            ps.setString(5,S1.getDeparture_date());
+            ps.setString(4,u1.getUsername());
+            ps.setString(5,u1.getPassword());
           
 
             int i = ps.executeUpdate();

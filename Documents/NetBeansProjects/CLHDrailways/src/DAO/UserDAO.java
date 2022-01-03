@@ -14,6 +14,6 @@ public interface UserDAO {
     public List<User> getlistUser();
     public List<User> getUserbyUserName(String Name);
     public boolean insertUser(User u1);
-    public boolean updateUser(User d1);
+    public boolean updateUser(User d1,int id);
     
 }

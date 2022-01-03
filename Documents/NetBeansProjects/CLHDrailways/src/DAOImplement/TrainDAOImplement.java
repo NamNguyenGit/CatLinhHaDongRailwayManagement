@@ -103,7 +103,7 @@ public class TrainDAOImplement implements TrainDAO {
     }
 
     @Override
-    public boolean updateTrain(Train T1) {
+    public boolean updateTrain(Train T1,int id) {
         boolean bl = false;
 
 
@@ -115,7 +115,8 @@ public class TrainDAOImplement implements TrainDAO {
         try {
             ps = conn.prepareStatement("UPDATE train SET status = ?  WHERE id = ?");
             ps.setInt(1,T1.getStatus());
-          
+            ps.setInt(2, id);
+            
 
             int i = ps.executeUpdate();
             if (i>0){

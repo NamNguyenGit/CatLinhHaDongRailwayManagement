@@ -667,7 +667,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
             s1.setDeparture_time(DeparturetT);
             s1.setDeparture_date(DeparturetD);
             
-            System.out.println(s1.toString());
+          
             boolean bl = new ScheduleDAOimplement().updateSchedule(s1,IDS);
             if (bl){
                 JOptionPane.showMessageDialog(null, "Update successful");
@@ -677,9 +677,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
                 Destination.setText(null);
                 DepartureTime.setText(null);
                 DepartureDate.setText(null);
-            }else{
-                
-                
+            }else{               
                 JOptionPane.showMessageDialog(null, "Update fail");
             }
         }else{

@@ -514,7 +514,9 @@ public class UserManageFrame extends javax.swing.JFrame {
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
         String svname = JOptionPane.showInputDialog("Insert name to find");
-
+        if(svname.length()==0 || svname==null){
+             JOptionPane.showMessageDialog(this, "Name required");
+        }
         List<User> s1 = new UserDAOImplement().getUserbyUserName(svname);
         if (s1 == null || s1.size() == 0) {
             JOptionPane.showMessageDialog(this, "We dont have " + svname + " here");
@@ -530,7 +532,7 @@ public class UserManageFrame extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        String IDS = IDD.getText().trim();
+        int IDS = Integer.parseInt(IDD.getText().trim()) ;
         String Name_user = Name.getText().trim();
         String Dob_user = DateofBirth.getText().trim();
         String Gender_user = Gender.getText().trim();
@@ -558,7 +560,7 @@ public class UserManageFrame extends javax.swing.JFrame {
             s1.setUsername(Username_user);
             
             
-            boolean bl = new UserDAOImplement().updateUser(s1);
+            boolean bl = new UserDAOImplement().updateUser(s1,IDS);
             if (bl){
                 JOptionPane.showMessageDialog(null, "Update successful");
                 btn_listall.doClick();

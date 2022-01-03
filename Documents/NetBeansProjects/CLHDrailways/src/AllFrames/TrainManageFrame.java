@@ -51,7 +51,7 @@ public class TrainManageFrame extends javax.swing.JFrame {
         defaultTableModel.setRowCount(0);
         List<Train> listTrain = new TrainDAOImplement().getlistTrain();
         for (Train S1: listTrain ){
-            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getStatus() == 1 ? "Dang hoat dong" : "Khong hoat dong"};
+            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getStatus() };
             defaultTableModel.addRow(data);
         }
     }
@@ -537,7 +537,7 @@ public class TrainManageFrame extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        String IDS = IDD.getText().trim();
+        int IDS = Integer.parseInt(IDD.getText().trim()) ;
         String Train_id = TrainID.getText().trim();
         String Statuss = Status.getText().trim();
         
@@ -547,7 +547,7 @@ public class TrainManageFrame extends javax.swing.JFrame {
         if(Train_id.length()==0){
             error += "\n Train ID required";
         }else{
-             Train_ID = Integer.parseInt(Train_id);
+            Train_ID = Integer.parseInt(Train_id);
         }
         int Status_Train = 0;
         if(Statuss.length()==0){
@@ -555,27 +555,23 @@ public class TrainManageFrame extends javax.swing.JFrame {
         }else{
              Status_Train = Integer.parseInt(Statuss);
         }
-       
-        
-        
-        
+              
         if (error.length() == 0) {
             Train s1 = new Train();
             s1.setTrain_id(Train_ID);
             s1.setStatus(Status_Train);
            
+           
             
-            
-            boolean bl = new TrainDAOImplement().updateTrain(s1);
+            boolean bl = new TrainDAOImplement().updateTrain(s1,IDS);
             if (bl){
                 JOptionPane.showMessageDialog(null, "Update successful");
                 btn_listall.doClick();
+                IDD.setText(null);
                 TrainID.setText(null);
                 Status.setText(null);
                 
-            }else{
-                
-                
+            }else{                               
                 JOptionPane.showMessageDialog(null, "Update fail");
             }
         }else{

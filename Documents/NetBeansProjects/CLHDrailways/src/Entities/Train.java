@@ -47,5 +47,12 @@ public class Train {
         this.Status = Status;
     }
 
+    @Override
+    public String toString() {
+        return "Train{" + "Id=" + Id + ", Train_id=" + Train_id + ", Status=" + Status + '}';
+    }
+    
+    
+
     
 }

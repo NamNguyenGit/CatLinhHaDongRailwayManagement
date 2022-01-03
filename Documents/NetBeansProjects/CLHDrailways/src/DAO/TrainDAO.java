@@ -14,6 +14,6 @@ public interface TrainDAO {
     public List<Train> getlistTrain();
     public boolean insertTrain(Train T1);
     public boolean deleteTrain(int IdTrain);
-    public boolean updateTrain(Train T1);
+    public boolean updateTrain(Train T1,int id);
     public List<Train> getTrainbyTrainID(int TrianID);
 }
