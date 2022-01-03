@@ -6,6 +6,7 @@
 package AllFrames;
 
 import Database.Database_Connect;
+import Entities.User;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -17,7 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
+import DAOImplement.UserDAOImplement;
 /**
  *
  * @author acer
@@ -27,6 +28,7 @@ public class AdminLoginFrame extends javax.swing.JFrame {
     /**
      * Creates new form AdminLoginFrame
      */
+    
     public AdminLoginFrame() {
          try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
@@ -145,7 +147,8 @@ public class AdminLoginFrame extends javax.swing.JFrame {
             ResultSet rs = stm.executeQuery(sql);
             
             if (rs.next()) {
-                AdminHomeFrame ahf = new AdminHomeFrame();
+                List<User> u1 = new UserDAOImplement().getUserbyUserName(user); 
+                AdminHomeFrame ahf = new AdminHomeFrame(u1.get(0));
                 ahf.show();
                 dispose();
             } else {
