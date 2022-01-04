@@ -137,8 +137,9 @@ public class UserDAOImplement implements UserDAO{
             ps.setString(1,u1.getName());
             ps.setString(2,u1.getDob());
             ps.setString(3,u1.getGender());
-            ps.setString(4,u1.getUsername());
-            ps.setString(5,u1.getPassword());
+            ps.setString(4,u1.getPhone());
+            ps.setString(5,u1.getUsername());
+            ps.setString(6,u1.getPassword());
           
 
             int i = ps.executeUpdate();

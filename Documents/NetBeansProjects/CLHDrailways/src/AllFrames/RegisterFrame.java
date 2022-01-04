@@ -5,18 +5,14 @@
  */
 package AllFrames;
 
-import Database.Database_Connect;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-
+import Entities.User;
+import DAOImplement.UserDAOImplement;
 /**
  *
  * @author acer
@@ -162,28 +158,73 @@ public class RegisterFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Connection conn;
-        conn = Database_Connect.getConnection();
-
-        String user = username.getText();
-        String pass = password.getText();
+        String Name_user = Name.getText().trim();
+        String dateofbirth = dob.getText().trim();
+        String Gender_user = gender.getText().trim();
+        String Phone_user = Phone.getText().trim();
+        String Username_user = username.getText().trim();
+        String Password_user = password.getText().trim();
         
-        try {
-            Statement stm = conn.createStatement();
-            String sql = "select * from user where role = 2 and username ='" + user + "' and password = '" + pass + "' ";
-            ResultSet rs = stm.executeQuery(sql);
-            
-            if (rs.next()) {
-               BuyTicketFrame BTF = new BuyTicketFrame();
-                BTF.show();
+        String error = "";
+       
+        if(Name_user.length()==0){
+            error += "\n Name required";
+        }
+       
+        if(dateofbirth.length()==0){
+            error += "\n Date of birth required";
+        }
+        if(Gender_user.length()==0){
+            error += "\n Gender required";
+        }
+        if(Phone_user.length()==0){
+            error += "\n Phone  required";
+        }
+        if(Username_user.length()==0){
+            error += "\n Username required";
+        }
+        if(Password_user.length()==0){
+            error += "\n Password required";
+        }
+
+        if (error.length() == 0) {
+            User s1 = new User();
+            s1.setName(Name_user);
+            s1.setDob(dateofbirth);
+            s1.setGender(Gender_user);
+            s1.setPhone(Phone_user);
+            s1.setUsername(Username_user);
+            s1.setPassword(Password_user);
+           
+
+            boolean bl = new UserDAOImplement().insertUser(s1);
+            if (bl) {
+                JOptionPane.showMessageDialog(this, "Welcome to Cat Linh Ha Dong Overhead Railway");
+                
+                Name.setText(null);
+                dob.setText(null);
+                gender.setText(null);
+                Phone.setText(null);
+                username.setText(null);
+                password.setText(null);
+                
+                ClientLoginFrame CLF = new ClientLoginFrame();
+                CLF.show();
                 dispose();
+                
+
             } else {
-                JOptionPane.showMessageDialog(this, "Username or Password is wrong.");
+                JOptionPane.showMessageDialog(null, "Opps something went wrong !!");
+                Name.setText(null);
+                dob.setText(null);
+                gender.setText(null);
+                Phone.setText(null);
                 username.setText(null);
                 password.setText(null);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+
+        } else {
+            JOptionPane.showMessageDialog(null, error);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
