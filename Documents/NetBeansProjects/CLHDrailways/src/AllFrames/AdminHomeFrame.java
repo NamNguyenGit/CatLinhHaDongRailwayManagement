@@ -8,6 +8,9 @@ package AllFrames;
 import DAOImplement.UserDAOImplement;
 import Entities.User;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -15,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -40,13 +44,22 @@ public class AdminHomeFrame extends javax.swing.JFrame {
         
         Username.setText("Hi Admin " + AdminHomeFrame.user.getName());
         
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        DATE.setText(df.format(date));
-        
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
-        LocalDateTime now = LocalDateTime.now();
-        TIME.setText(dtf.format(now));
+        ActionListener actionListener = new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                DATE.setText(df.format(date));
+                
+                Date date1 = new Date();
+                DateFormat dtf = new SimpleDateFormat("HH:mm:ss");
+                String time = dtf.format(date);
+                TIME.setText(time);
+             }
+         };
+        Timer timer = new Timer(1000,actionListener);
+        timer.setInitialDelay(0);
+        timer.start();
     }
 
    

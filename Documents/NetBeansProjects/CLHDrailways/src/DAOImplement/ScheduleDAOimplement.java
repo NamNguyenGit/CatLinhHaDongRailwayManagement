@@ -184,6 +184,27 @@ public class ScheduleDAOimplement implements SheduleDAO {
         return listschedule;
     }
 
+    @Override
+    public int getstatusbyTrainID(int TrainID) {
+        int id = 0;
+
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        conn = Database_Connect.getConnection();
+        try {
+            ps = conn.prepareStatement("SELECT * FROM train WHERE train_id = ? ");
+            ps.setInt(1, TrainID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("status");
+            }
+        } catch (Exception e) {
+        }
+        return id;
+    }
+
    
 
     }

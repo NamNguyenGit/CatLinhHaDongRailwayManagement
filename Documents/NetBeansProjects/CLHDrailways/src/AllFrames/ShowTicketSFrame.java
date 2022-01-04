@@ -5,9 +5,13 @@
  */
 package AllFrames;
 
+import Common.Common;
 import DAOImplement.ScheduleDAOimplement;
 import Entities.Schedule;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +19,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
@@ -54,20 +59,34 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
         defaultTableModel.setRowCount(0);
         List<Schedule> listSchedule = new ScheduleDAOimplement().getlistSchedule();
         for (Schedule S1: listSchedule ){
-            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getDeparture(),S1.getDestination(),S1.getDeparture_time(),S1.getDeparture_date()};
+            int status_train = new ScheduleDAOimplement().getstatusbyTrainID(S1.getTrain_id());
+            S1.setTrain_status(status_train);
+            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getDeparture(),S1.getDestination(),S1.getDeparture_time(),Common.formatDate(S1.getDeparture_date()),S1.getTrain_status() == 1 ? "Active" : "Busy"};
             defaultTableModel.addRow(data);
         }
         
+        ActionListener actionListener = new ActionListener() {
+             @Override
+             public void actionPerformed(ActionEvent e) {
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                DATE.setText(df.format(date));
+                
+                Date date1 = new Date();
+                DateFormat dtf = new SimpleDateFormat("HH:mm:ss");
+                String time = dtf.format(date);
+                TIME.setText(time);
+             }
+         };
+        Timer timer = new Timer(1000,actionListener);
+        timer.setInitialDelay(0);
+        timer.start();
         
         
         
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        DATE.setText(df.format(date));
         
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm");
-        LocalDateTime now = LocalDateTime.now();
-        TIME.setText(dtf.format(now));
+        
+        
     }
 
     /**
@@ -112,11 +131,11 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(117, 117, 117)
+                .addGap(143, 143, 143)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TIME, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 298, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(DATE, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,12 +145,11 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(TIME, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(DATE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(TIME, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
