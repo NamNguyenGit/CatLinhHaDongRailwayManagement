@@ -5,6 +5,7 @@
  */
 package AllFrames;
 
+import Common.Common;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,6 +15,9 @@ import javax.swing.table.DefaultTableModel;
 import Entities.Schedule;
 import DAOImplement.ScheduleDAOimplement;
 import Entities.User;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -52,7 +56,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         defaultTableModel.setRowCount(0);
         List<Schedule> listSchedule = new ScheduleDAOimplement().getlistSchedule();
         for (Schedule S1: listSchedule ){
-            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getDeparture(),S1.getDestination(),S1.getDeparture_time(),S1.getDeparture_date()};
+            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getDeparture(),S1.getDestination(),S1.getDeparture_time(),Common.formatDate(S1.getDeparture_date())};
             defaultTableModel.addRow(data);
         }
     }
@@ -86,7 +90,6 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         TableSchedule = new javax.swing.JTable();
         TrainID = new javax.swing.JTextField();
         DepartureTime = new javax.swing.JTextField();
-        DepartureDate = new javax.swing.JTextField();
         Departure = new javax.swing.JTextField();
         Destination = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
@@ -102,6 +105,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         IDD = new javax.swing.JTextField();
         jPanel13 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
+        jdate = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -402,6 +406,8 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jdate.setToolTipText("dd-mm-yyyy");
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -422,10 +428,10 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Destination, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                     .addComponent(Departure, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
-                    .addComponent(DepartureDate, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                     .addComponent(DepartureTime, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                     .addComponent(TrainID)
-                    .addComponent(IDD))
+                    .addComponent(IDD)
+                    .addComponent(jdate))
                 .addGap(51, 51, 51))
         );
         jPanel6Layout.setVerticalGroup(
@@ -435,7 +441,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(IDD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TrainID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -451,10 +457,10 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(DepartureTime, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(DepartureDate, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jdate))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1))
@@ -465,18 +471,19 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(326, 326, 326)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(326, 326, 326)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -528,7 +535,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         defaultTableModel.setRowCount(0);
         List<Schedule> listSchedule = new ScheduleDAOimplement().getlistSchedule();
         for (Schedule S1: listSchedule ){
-            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getDeparture(),S1.getDestination(),S1.getDeparture_time(),S1.getDeparture_date()};
+            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getDeparture(),S1.getDestination(),S1.getDeparture_time(),Common.formatDate(S1.getDeparture_date())};
             defaultTableModel.addRow(data);
         }
     }//GEN-LAST:event_btn_listallActionPerformed
@@ -539,7 +546,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         Departure.setText(null);
         Destination.setText(null);
         DepartureTime.setText(null);
-        DepartureDate.setText(null);
+        jdate.setText(null);
     }//GEN-LAST:event_jLabel13MouseClicked
     int IDtrain = 0 ;
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
@@ -556,7 +563,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         } else {
             defaultTableModel.setRowCount(0);
             for (Schedule s2 : s1) {
-                Object[] data = {s2.getId(),s2.getTrain_id(),s2.getDeparture(),s2.getDestination(),s2.getDeparture_time(),s2.getDeparture_date()};
+                Object[] data = {s2.getId(),s2.getTrain_id(),s2.getDeparture(),s2.getDestination(),s2.getDeparture_time(),Common.formatDate(s2.getDeparture_date())};
                 defaultTableModel.addRow(data);
             }
 
@@ -569,7 +576,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         String Departuret = Departure.getText().trim();
         String Destinationt = Destination.getText().trim();
         String DeparturetT = DepartureTime.getText().trim();
-        String DeparturetD = DepartureDate.getText().trim();
+        String DeparturetD = jdate.getText().trim();
         
         String error = "";
         int Train_ID = 0;
@@ -588,8 +595,17 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         if(DeparturetT.length()==0){
             error += "\n Departure Time  required";
         }
+        Date exDate = null; 
         if(DeparturetD.length()==0){
             error += "\n Departure Date required";
+        }else{
+            SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                exDate = sf.parse(DeparturetD);
+            } catch (ParseException ex) {
+                error += "\n  Date format dd/MM/yyyy";
+            }
+            
         }
 
         if (error.length() == 0) {
@@ -598,7 +614,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
             s1.setDeparture(Departuret);
             s1.setDestination(Destinationt);
             s1.setDeparture_time(DeparturetT);
-            s1.setDeparture_date(DeparturetD);
+            s1.setDeparture_date(exDate);
            
 
             boolean bl = new ScheduleDAOimplement().insertSchedule(s1);
@@ -609,7 +625,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
                 Departure.setText(null);
                 Destination.setText(null);
                 DepartureTime.setText(null);
-                DepartureDate.setText(null);
+                jdate.setText(null);
                 btn_listall.doClick();
 
             } else {
@@ -618,7 +634,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
                 Departure.setText(null);
                 Destination.setText(null);
                 DepartureTime.setText(null);
-                DepartureDate.setText(null);
+                jdate.setText(null);
                 btn_listall.doClick();
             }
 
@@ -636,7 +652,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         String Departuret = Departure.getText().trim();
         String Destinationt = Destination.getText().trim();
         String DeparturetT = DepartureTime.getText().trim();
-        String DeparturetD = DepartureDate.getText().trim();
+        String DeparturetD = jdate.getText().trim();
         String error = "";
         int Train_ID = 0;
         if(Train_id.length()==0){
@@ -654,8 +670,17 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         if(DeparturetT.length()==0){
             error += "\n Departure Time  required";
         }
+        Date exDate = null; 
         if(DeparturetD.length()==0){
             error += "\n Departure Date required";
+        }else{
+            SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                exDate = sf.parse(DeparturetD);
+            } catch (ParseException ex) {
+                error += "\n  Date format dd/MM/yyyy";
+            }
+            
         }
         
         
@@ -665,7 +690,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
             s1.setDeparture(Departuret);
             s1.setDestination(Destinationt);
             s1.setDeparture_time(DeparturetT);
-            s1.setDeparture_date(DeparturetD);
+            s1.setDeparture_date(exDate);
             
           
             boolean bl = new ScheduleDAOimplement().updateSchedule(s1,IDS);
@@ -676,7 +701,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
                 Departure.setText(null);
                 Destination.setText(null);
                 DepartureTime.setText(null);
-                DepartureDate.setText(null);
+                jdate.setText(null);
             }else{               
                 JOptionPane.showMessageDialog(null, "Update fail");
             }
@@ -693,7 +718,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         Departure.setText(TableSchedule.getValueAt(row, 2)+"");
         Destination.setText(TableSchedule.getValueAt(row, 3)+"");
         DepartureTime.setText(TableSchedule.getValueAt(row, 4)+"");
-        DepartureDate.setText(TableSchedule.getValueAt(row, 5)+"");
+        jdate.setText(TableSchedule.getValueAt(row, 5)+"");
     }//GEN-LAST:event_TableScheduleMouseClicked
 
     /**
@@ -733,7 +758,6 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Departure;
-    private javax.swing.JTextField DepartureDate;
     private javax.swing.JTextField DepartureTime;
     private javax.swing.JTextField Destination;
     private javax.swing.JTextField IDD;
@@ -768,5 +792,6 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jdate;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,12 +5,15 @@
  */
 package AllFrames;
 
+import DAOImplement.UserDAOImplement;
 import Database.Database_Connect;
+import Entities.User;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -126,7 +129,7 @@ public class ClientLoginFrame extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
-        ChooseTicketFrame WF = new ChooseTicketFrame();
+        WelcomeFrame WF = new WelcomeFrame();
         WF.show();
         dispose();
     }//GEN-LAST:event_jLabel4MouseClicked
@@ -140,11 +143,12 @@ public class ClientLoginFrame extends javax.swing.JFrame {
         
         try {
             Statement stm = conn.createStatement();
-            String sql = "select * from user where role = 2 and username ='" + user + "' and password = '" + pass + "' ";
+            String sql = "select * from user where username ='" + user + "' and password = '" + pass + "' ";
             ResultSet rs = stm.executeQuery(sql);
             
             if (rs.next()) {
-               BuyTicketFrame BTF = new BuyTicketFrame();
+                List<User> u1 = new UserDAOImplement().getUserbyUserName(user);
+                ChooseTicketFrame BTF = new ChooseTicketFrame(u1.get(0));
                 BTF.show();
                 dispose();
             } else {

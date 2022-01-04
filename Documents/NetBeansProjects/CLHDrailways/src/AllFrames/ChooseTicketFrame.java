@@ -5,6 +5,7 @@
  */
 package AllFrames;
 
+import Entities.User;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +21,9 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
     /**
      * Creates new form ChooseTicketFrame
      */
-    public ChooseTicketFrame() {
+    private static User user;
+    public ChooseTicketFrame(User user) {
+        ChooseTicketFrame.user = user;
          try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
@@ -28,6 +31,8 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
         }
         initComponents();
         setLocationRelativeTo(null);
+        
+        Name_username.setText("Please Choose your tickets " + ChooseTicketFrame.user.getName());
     }
 
     /**
@@ -40,6 +45,7 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        Name_username = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -49,6 +55,11 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(810, 450));
 
         jPanel1.setLayout(null);
+
+        Name_username.setFont(new java.awt.Font("Segoe UI Black", 3, 18)); // NOI18N
+        Name_username.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel1.add(Name_username);
+        Name_username.setBounds(430, 130, 340, 30);
 
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jButton1.setText("Monthly Tickets");
@@ -62,6 +73,11 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
 
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jButton2.setText("Daily Tickets");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton2);
         jButton2.setBounds(430, 180, 140, 50);
 
@@ -82,7 +98,7 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,17 +110,18 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ClientLoginFrame CLF = new ClientLoginFrame();
-        CLF.show();
-        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-        WelcomeFrame WF = new WelcomeFrame();
+        ClientLoginFrame WF = new ClientLoginFrame();
         WF.show();
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -136,12 +153,13 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ChooseTicketFrame().setVisible(true);
+                new ChooseTicketFrame(ChooseTicketFrame.user).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Name_username;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;

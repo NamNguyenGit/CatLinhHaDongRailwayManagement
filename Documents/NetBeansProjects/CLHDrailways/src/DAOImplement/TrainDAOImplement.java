@@ -29,7 +29,7 @@ public class TrainDAOImplement implements TrainDAO {
         
          conn = Database_Connect.getConnection();
         try {
-            ps = conn.prepareStatement("select * from train");
+            ps = conn.prepareStatement("select * from train ORDER BY train_id ASC ");
             rs = ps.executeQuery();
             while (rs.next()){
                 Train T1 = new Train();

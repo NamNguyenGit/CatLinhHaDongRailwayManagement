@@ -55,7 +55,6 @@ public class AdminLoginFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,13 +107,6 @@ public class AdminLoginFrame extends javax.swing.JFrame {
         jLabel3.setText("USERNAME");
         jPanel1.add(jLabel3);
         jLabel3.setBounds(110, 180, 130, 40);
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 3, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("LOGIN");
-        jPanel1.add(jLabel2);
-        jLabel2.setBounds(250, -20, 270, 140);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/admin.jpg"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -211,7 +203,6 @@ public class AdminLoginFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;

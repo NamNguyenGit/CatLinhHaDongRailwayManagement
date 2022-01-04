@@ -5,6 +5,8 @@
  */
 package Entities;
 
+import java.util.Date;
+
 /**
  *
  * @author acer
@@ -15,21 +17,21 @@ public class Schedule {
     private String Departure;
     private String Destination;
     private String Departure_time;
-    private String Departure_date;
+    private Date Departure_date;
+    private int Train_status;
 
     public Schedule() {
     }
 
-    public Schedule(int Id, int Train_id, String Departure, String Destination, String Departure_time, String Departure_date) {
+    public Schedule(int Id, int Train_id, String Departure, String Destination, String Departure_time, Date Departure_date, int Train_status) {
         this.Id = Id;
         this.Train_id = Train_id;
         this.Departure = Departure;
         this.Destination = Destination;
         this.Departure_time = Departure_time;
         this.Departure_date = Departure_date;
+        this.Train_status = Train_status;
     }
-
-    
 
     public int getId() {
         return Id;
@@ -46,7 +48,6 @@ public class Schedule {
     public void setTrain_id(int Train_id) {
         this.Train_id = Train_id;
     }
-
 
     public String getDeparture() {
         return Departure;
@@ -72,18 +73,24 @@ public class Schedule {
         this.Departure_time = Departure_time;
     }
 
-    public String getDeparture_date() {
+    public Date getDeparture_date() {
         return Departure_date;
     }
 
-    public void setDeparture_date(String Departure_date) {
+    public void setDeparture_date(Date Departure_date) {
         this.Departure_date = Departure_date;
     }
 
-    @Override
-    public String toString() {
-        return "Schedule{" + "Id=" + Id + ", Train_id=" + Train_id + ", Departure=" + Departure + ", Destination=" + Destination + ", Departure_time=" + Departure_time + ", Departure_date=" + Departure_date + '}';
+    public int getTrain_status() {
+        return Train_status;
     }
+
+    public void setTrain_status(int Train_status) {
+        this.Train_status = Train_status;
+    }
+
+    
+    
 
     
 }

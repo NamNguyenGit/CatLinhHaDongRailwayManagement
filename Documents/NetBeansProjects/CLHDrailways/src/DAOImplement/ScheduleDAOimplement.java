@@ -8,6 +8,9 @@ import DAO.SheduleDAO;
 import Database.Database_Connect;
 import Entities.Schedule;
 import java.sql.Connection;
+import java.sql.Date;
+import Common.Common;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -38,7 +41,7 @@ public class ScheduleDAOimplement implements SheduleDAO {
                 S1.setDeparture(rs.getString("Departure"));
                 S1.setDestination(rs.getString("Destination"));
                 S1.setDeparture_time(rs.getString("Departure_time"));
-                S1.setDeparture_date(rs.getString("Departure_date"));
+                S1.setDeparture_date(rs.getDate("Departure_date"));
                 listschedule.add(S1);
             }
         } catch (SQLException e) {
@@ -65,7 +68,7 @@ public class ScheduleDAOimplement implements SheduleDAO {
             ps.setString(2,S1.getDeparture());
             ps.setString(3,S1.getDestination());
             ps.setString(4,S1.getDeparture_time());
-            ps.setString(5,S1.getDeparture_date());
+            ps.setDate(5, new Date(S1.getDeparture_date().getTime()));
           
 
             int i = ps.executeUpdate();
@@ -124,7 +127,7 @@ public class ScheduleDAOimplement implements SheduleDAO {
             ps.setString(2,d1.getDeparture());
             ps.setString(3,d1.getDestination());
             ps.setString(4,d1.getDeparture_time());
-            ps.setString(5,d1.getDeparture_date());
+            ps.setDate(5,  new Date(d1.getDeparture_date().getTime()) );
             ps.setInt(6,id);
             System.out.println(d1.getId());
             int i = ps.executeUpdate();
@@ -167,7 +170,7 @@ public class ScheduleDAOimplement implements SheduleDAO {
                 S1.setDeparture(rs.getString("Departure"));
                 S1.setDestination(rs.getString("Destination"));
                 S1.setDeparture_time(rs.getString("Departure_time"));
-                S1.setDeparture_date(rs.getString("Departure_date"));
+                S1.setDeparture_date(rs.getDate("Departure_date"));
                 listschedule.add(S1);
 
             }
