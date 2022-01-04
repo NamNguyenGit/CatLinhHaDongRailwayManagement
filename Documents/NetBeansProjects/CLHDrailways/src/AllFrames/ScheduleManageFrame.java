@@ -14,7 +14,11 @@ import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import Entities.Schedule;
 import DAOImplement.ScheduleDAOimplement;
+import Database.Database_Connect;
 import Entities.User;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,6 +34,21 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
     /**
      * Creates new form ScheduleManageFrame
      */
+    public void loadcombobox() {
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        conn = Database_Connect.getConnection();
+        String sql = "Select * from train ORDER BY train_id ASC";
+        try {
+              ps = conn.prepareStatement(sql);
+              rs = ps.executeQuery();
+              while(rs.next()){
+                 Combobox.addItem(rs.getString("train_id"));
+              }
+        } catch (Exception e) {
+        }
+    }
     private static User user;
     DefaultTableModel defaultTableModel;
     public ScheduleManageFrame(User user) {
@@ -41,6 +60,11 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         }
         initComponents();
         setLocationRelativeTo(null);
+        
+        
+        
+        
+        loadcombobox();
         
         defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("ID");
@@ -88,7 +112,6 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableSchedule = new javax.swing.JTable();
-        TrainID = new javax.swing.JTextField();
         DepartureTime = new javax.swing.JTextField();
         Departure = new javax.swing.JTextField();
         Destination = new javax.swing.JTextField();
@@ -106,6 +129,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jdate = new javax.swing.JTextField();
+        Combobox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -429,9 +453,9 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
                     .addComponent(Destination, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                     .addComponent(Departure, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
                     .addComponent(DepartureTime, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
-                    .addComponent(TrainID)
                     .addComponent(IDD)
-                    .addComponent(jdate))
+                    .addComponent(jdate)
+                    .addComponent(Combobox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(51, 51, 51))
         );
         jPanel6Layout.setVerticalGroup(
@@ -441,10 +465,10 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(IDD, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TrainID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(Combobox))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Departure, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -542,7 +566,8 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
 
     private void jLabel13MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel13MouseClicked
         // TODO add your handling code here:
-        TrainID.setText(null);
+        IDD.setText(null);
+        Combobox.setSelectedItem(0);
         Departure.setText(null);
         Destination.setText(null);
         DepartureTime.setText(null);
@@ -572,7 +597,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here
-        String Train_id = TrainID.getText().trim();
+        String Train_id = (String) Combobox.getSelectedItem();
         String Departuret = Departure.getText().trim();
         String Destinationt = Destination.getText().trim();
         String DeparturetT = DepartureTime.getText().trim();
@@ -621,7 +646,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
             if (bl) {
                 JOptionPane.showMessageDialog(this, "Add succesful");
 
-                TrainID.setText(null);
+                Combobox.setSelectedIndex(0);
                 Departure.setText(null);
                 Destination.setText(null);
                 DepartureTime.setText(null);
@@ -630,7 +655,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
 
             } else {
                 JOptionPane.showMessageDialog(null, "Add fail");
-                TrainID.setText(null);
+                Combobox.setSelectedIndex(0);
                 Departure.setText(null);
                 Destination.setText(null);
                 DepartureTime.setText(null);
@@ -648,7 +673,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         int IDS = Integer.parseInt(IDD.getText().trim());
-        String Train_id = TrainID.getText().trim();
+         String Train_id = (String) Combobox.getSelectedItem();
         String Departuret = Departure.getText().trim();
         String Destinationt = Destination.getText().trim();
         String DeparturetT = DepartureTime.getText().trim();
@@ -697,7 +722,8 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
             if (bl){
                 JOptionPane.showMessageDialog(null, "Update successful");
                 btn_listall.doClick();
-                TrainID.setText(null);
+                IDD.setText(null);
+                Combobox.setSelectedIndex(0);
                 Departure.setText(null);
                 Destination.setText(null);
                 DepartureTime.setText(null);
@@ -714,7 +740,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int row = TableSchedule.getSelectedRow();
         IDD.setText(TableSchedule.getValueAt(row, 0)+"");
-        TrainID.setText(TableSchedule.getValueAt(row, 1)+"");
+        Combobox.setSelectedItem(TableSchedule.getValueAt(row, 1)+"");
         Departure.setText(TableSchedule.getValueAt(row, 2)+"");
         Destination.setText(TableSchedule.getValueAt(row, 3)+"");
         DepartureTime.setText(TableSchedule.getValueAt(row, 4)+"");
@@ -757,12 +783,12 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> Combobox;
     private javax.swing.JTextField Departure;
     private javax.swing.JTextField DepartureTime;
     private javax.swing.JTextField Destination;
     private javax.swing.JTextField IDD;
     private javax.swing.JTable TableSchedule;
-    private javax.swing.JTextField TrainID;
     private javax.swing.JButton btn_listall;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
