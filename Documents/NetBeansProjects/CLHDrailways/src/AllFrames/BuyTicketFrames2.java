@@ -398,8 +398,8 @@ public class BuyTicketFrames2 extends javax.swing.JFrame {
             boolean bl = new TicketDAOImplement().insertTicket2(s1);
             if (bl) {
                 JOptionPane.showMessageDialog(this, "Have a nice trip !!!");
-                ShowTicketSFrame STF = new ShowTicketSFrame(BuyTicketFrames2.user);
-                STF.show();
+                ShowTicketSFrame STF1 = new ShowTicketSFrame(BuyTicketFrames2.user);
+                STF1.show();
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Opps Something went wrong !!");

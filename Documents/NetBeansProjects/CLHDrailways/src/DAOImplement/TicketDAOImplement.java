@@ -60,10 +60,11 @@ public class TicketDAOImplement implements TicketDAO{
 
         conn = Database_Connect.getConnection();
         try {
-            ps = conn.prepareStatement("insert into ticket(user_id,expirationdate,price) values (?,?,?)");
-            ps.setInt(1,T1.getUser_id());      
-            ps.setDate(2,new Date(T1.getExpire_date().getTime()));
-            ps.setDouble(3,200000);
+            ps = conn.prepareStatement("insert into ticket(user_id,renewabledate,expirationdate,price) values (?,?,?,?)");
+            ps.setInt(1,T1.getUser_id());  
+            ps.setDate(2,new Date(T1.getRenew_date().getTime()));
+            ps.setDate(3,new Date(T1.getExpire_date().getTime()));
+            ps.setDouble(4,200000);
             
           
 

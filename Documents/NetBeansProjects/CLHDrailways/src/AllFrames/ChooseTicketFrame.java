@@ -124,8 +124,8 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        ShowTicketSFrame STF = new ShowTicketSFrame(ChooseTicketFrame.user);
-        STF.show();
+        ShowTicketS1dayFrame STF1 = new ShowTicketS1dayFrame(ChooseTicketFrame.user);
+        STF1.show();
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
