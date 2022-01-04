@@ -52,7 +52,7 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(810, 450));
+        setPreferredSize(new java.awt.Dimension(800, 450));
 
         jPanel1.setLayout(null);
 
@@ -110,6 +110,9 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        ShowTicketSFrame STF = new ShowTicketSFrame(ChooseTicketFrame.user);
+        STF.show();
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -121,6 +124,9 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        ShowTicketSFrame STF = new ShowTicketSFrame(ChooseTicketFrame.user);
+        STF.show();
+        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

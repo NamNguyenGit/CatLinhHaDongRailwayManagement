@@ -8,13 +8,12 @@ package AllFrames;
 import Common.Common;
 import DAOImplement.ScheduleDAOimplement;
 import Entities.Schedule;
+import Entities.User;
 import com.sun.java.swing.plaf.windows.WindowsLookAndFeel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -23,7 +22,7 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
-
+import DAOImplement.ScheduleDAOimplement;
 /**
  *
  * @author acer
@@ -33,8 +32,10 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
     /**
      * Creates new form ShowTicketSFrame
      */
+    private static User user;
     DefaultTableModel defaultTableModel;
-    public ShowTicketSFrame() {
+    public ShowTicketSFrame(User user) {
+        ShowTicketSFrame.user = user;
          try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
@@ -104,6 +105,7 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         TIME = new javax.swing.JLabel();
         DATE = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         TableSchedule = new javax.swing.JTable();
@@ -126,12 +128,20 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
         DATE.setFont(new java.awt.Font("Segoe UI Black", 3, 24)); // NOI18N
         DATE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-back-arrow-48.png"))); // NOI18N
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(143, 143, 143)
+                .addComponent(jLabel3)
+                .addGap(95, 95, 95)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TIME, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,12 +161,16 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
                     .addComponent(DATE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(29, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1230, -1));
 
         jPanel3.setBackground(new java.awt.Color(153, 153, 153));
 
+        TableSchedule.setBackground(new java.awt.Color(204, 204, 204));
         TableSchedule.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -168,6 +182,11 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TableSchedule.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TableScheduleMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(TableSchedule);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -196,6 +215,25 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        // TODO add your handling code here:
+        ChooseTicketFrame CTF = new ChooseTicketFrame(ShowTicketSFrame.user);
+        CTF.show();
+        dispose();
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void TableScheduleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableScheduleMouseClicked
+        // TODO add your handling code here:
+        int row = TableSchedule.getSelectedRow();
+        String Train_id = TableSchedule.getModel().getValueAt(row, 1).toString();
+        int train_id = Integer.parseInt(Train_id);
+        Date Expire_date = new ScheduleDAOimplement().getDateBuybyTrainID(train_id);
+       
+        BuyTicketFrames2 BTF = new BuyTicketFrames2(Expire_date,ShowTicketSFrame.user);
+        BTF.show();
+        dispose();
+    }//GEN-LAST:event_TableScheduleMouseClicked
 
     /**
      * @param args the command line arguments
@@ -227,7 +265,7 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ShowTicketSFrame().setVisible(true);
+                new ShowTicketSFrame(ShowTicketSFrame.user).setVisible(true);
             }
         });
     }
@@ -238,6 +276,7 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
     private javax.swing.JTable TableSchedule;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

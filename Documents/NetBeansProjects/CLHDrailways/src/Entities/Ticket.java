@@ -5,7 +5,7 @@
  */
 package Entities;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -18,17 +18,19 @@ public class Ticket {
     private Date Date_buy;
     private Date Renew_date;
     private Date Expire_date;
+    private Float Price;
 
     public Ticket() {
     }
 
-    public Ticket(int Id, int User_id, String User_name, Date Date_buy, Date Renew_date, Date Expire_date) {
+    public Ticket(int Id, int User_id, String User_name, Date Date_buy, Date Renew_date, Date Expire_date, Float Price) {
         this.Id = Id;
         this.User_id = User_id;
         this.User_name = User_name;
         this.Date_buy = Date_buy;
         this.Renew_date = Renew_date;
         this.Expire_date = Expire_date;
+        this.Price = Price;
     }
 
     public int getId() {
@@ -78,6 +80,18 @@ public class Ticket {
     public void setExpire_date(Date Expire_date) {
         this.Expire_date = Expire_date;
     }
+
+    public Float getPrice() {
+        return Price;
+    }
+
+    public void setPrice(Float Price) {
+        this.Price = Price;
+    }
+
+    
+
+    
     
     
 }

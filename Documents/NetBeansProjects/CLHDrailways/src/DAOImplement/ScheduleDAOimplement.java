@@ -14,6 +14,8 @@ import Common.Common;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -205,6 +207,35 @@ public class ScheduleDAOimplement implements SheduleDAO {
         return id;
     }
 
+    @Override
+    public Date getDateBuybyTrainID(int TrainID) {
+        String date = "";
+        java.util.Date exDate = null;
+         SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
+            try {
+                exDate = sf.parse(date);
+            } catch (ParseException ex) {
+               
+            }
+        
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        conn = Database_Connect.getConnection();
+        try {
+            ps = conn.prepareStatement("SELECT * FROM schedule WHERE train_id = ? ");
+            ps.setInt(1, TrainID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                exDate = rs.getDate("departure_date");
+            }
+        } catch (Exception e) {
+        }
+        return (Date) exDate;
+    }
+
+    
    
 
     }

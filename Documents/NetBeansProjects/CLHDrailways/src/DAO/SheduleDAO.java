@@ -7,6 +7,7 @@ package DAO;
 
 import java.util.List;
 import Entities.Schedule;
+import java.sql.Date;
 /**
  *
  * @author acer
@@ -18,5 +19,7 @@ public interface SheduleDAO {
     public boolean updateSchedule(Schedule d1, int id);
     public List<Schedule> getSchedulesbyTrainID(int TrianID);
     public int getstatusbyTrainID(int TrainID);
+    public Date getDateBuybyTrainID(int TrainID);
+  
     
 }
