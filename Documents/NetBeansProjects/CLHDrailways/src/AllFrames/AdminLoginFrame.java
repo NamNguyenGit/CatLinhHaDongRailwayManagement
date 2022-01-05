@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import DAOImplement.UserDAOImplement;
+
 /**
  *
  * @author acer
@@ -28,9 +29,8 @@ public class AdminLoginFrame extends javax.swing.JFrame {
     /**
      * Creates new form AdminLoginFrame
      */
-    
     public AdminLoginFrame() {
-         try {
+        try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(AdminLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -132,14 +132,14 @@ public class AdminLoginFrame extends javax.swing.JFrame {
 
         String user = username.getText();
         String pass = password.getText();
-        
+
         try {
             Statement stm = conn.createStatement();
             String sql = "select * from user where role = 1 and username ='" + user + "' and password = '" + pass + "' ";
             ResultSet rs = stm.executeQuery(sql);
-            
+
             if (rs.next()) {
-                List<User> u1 = new UserDAOImplement().getUserbyUserName(user); 
+                List<User> u1 = new UserDAOImplement().getUserbyUserName(user);
                 AdminHomeFrame ahf = new AdminHomeFrame(u1.get(0));
                 ahf.show();
                 dispose();

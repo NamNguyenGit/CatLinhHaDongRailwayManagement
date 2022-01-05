@@ -30,7 +30,7 @@ public class ClientLoginFrame extends javax.swing.JFrame {
      * Creates new form ClientLoginFrame
      */
     public ClientLoginFrame() {
-         try {
+        try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(ClientLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -140,12 +140,12 @@ public class ClientLoginFrame extends javax.swing.JFrame {
 
         String user = username.getText();
         String pass = password.getText();
-        
+
         try {
             Statement stm = conn.createStatement();
             String sql = "select * from user where username ='" + user + "' and password = '" + pass + "' ";
             ResultSet rs = stm.executeQuery(sql);
-            
+
             if (rs.next()) {
                 List<User> u1 = new UserDAOImplement().getUserbyUserName(user);
                 ChooseTicketFrame BTF = new ChooseTicketFrame(u1.get(0));

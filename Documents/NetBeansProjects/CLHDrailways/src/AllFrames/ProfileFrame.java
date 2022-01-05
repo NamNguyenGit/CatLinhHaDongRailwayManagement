@@ -18,13 +18,13 @@ import javax.swing.UnsupportedLookAndFeelException;
  *
  * @author acer
  */
-
 public class ProfileFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form ProfileFrame
      */
     private static User user;
+
     public ProfileFrame(User user) {
         ProfileFrame.user = user;
         try {
@@ -34,23 +34,22 @@ public class ProfileFrame extends javax.swing.JFrame {
         }
         initComponents();
         setLocationRelativeTo(null);
-        
-        iduser.setText(user.getId()+"");
+
+        iduser.setText(user.getId() + "");
         nameuser.setText(user.getName());
         birthdayuser.setText(user.getDob());
         genderuser.setText(user.getGender());
         phoneuser.setText(user.getPhone());
         String role = null;
-        if(user.getRole()==1){
-           role = ("Admin");
+        if (user.getRole() == 1) {
+            role = ("Admin");
+        } else {
+            role = ("Client");
         }
-        else{
-           role  = ("Client");
-        }
-       
+
         roleuser.setText(role);
         usernameuser.setText(user.getUsername());
-        
+
     }
 
     /**
@@ -395,33 +394,31 @@ public class ProfileFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
+
         String Name_user = nameuser.getText().trim();
         String Dob_user = birthdayuser.getText().trim();
         String Gender_user = genderuser.getText().trim();
         String Phone_user = phoneuser.getText().trim();
         String Username_user = usernameuser.getText().trim();
-        
-        
+
         String error = "";
         int Roles = 0;
-        if(Name_user.length()==0){
+        if (Name_user.length() == 0) {
             error += "\n Name required";
         }
-        if(Dob_user.length()==0){
+        if (Dob_user.length() == 0) {
             error += "\n Birthday required";
         }
-        if(Gender_user.length()==0){
+        if (Gender_user.length() == 0) {
             error += "\n Gender required";
         }
-        if(Phone_user.length()==0){
+        if (Phone_user.length() == 0) {
             error += "\n Phone required";
         }
-        if(Username_user.length()==0){
+        if (Username_user.length() == 0) {
             error += "\n Username required";
         }
-      
-        
+
         if (error.length() == 0) {
             User s1 = new User();
             s1.setName(Name_user);
@@ -429,15 +426,14 @@ public class ProfileFrame extends javax.swing.JFrame {
             s1.setGender(Gender_user);
             s1.setPhone(Phone_user);
             s1.setUsername(Username_user);
-            
-            
-            boolean bl = new UserDAOImplement().updateInformationUser(s1,user.getId());
-            if (bl){
+
+            boolean bl = new UserDAOImplement().updateInformationUser(s1, user.getId());
+            if (bl) {
                 JOptionPane.showMessageDialog(null, "Hello new guy!!");
-            }else{                                
+            } else {
                 JOptionPane.showMessageDialog(null, "You still not change anything!!");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, error);
         }
     }//GEN-LAST:event_jButton2ActionPerformed

@@ -22,17 +22,17 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
      * Creates new form ChooseTicketFrame
      */
     private static User user;
+
     public ChooseTicketFrame(User user) {
         ChooseTicketFrame.user = user;
-         try {
+        try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(ChooseTicketFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
         setLocationRelativeTo(null);
-        
-        
+
     }
 
     /**

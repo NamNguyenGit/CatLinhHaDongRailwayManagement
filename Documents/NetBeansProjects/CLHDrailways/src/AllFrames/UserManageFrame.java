@@ -17,6 +17,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import Entities.User;
 import DAOImplement.UserDAOImplement;
+import java.awt.Font;
+import javax.swing.table.JTableHeader;
 
 /**
  *
@@ -29,16 +31,17 @@ public class UserManageFrame extends javax.swing.JFrame {
      */
     private static User user;
     DefaultTableModel defaultTableModel;
+
     public UserManageFrame(User user) {
         UserManageFrame.user = user;
-         try {
+        try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(UserManageFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
         setLocationRelativeTo(null);
-        
+
         defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("ID");
         defaultTableModel.addColumn("Name");
@@ -47,16 +50,16 @@ public class UserManageFrame extends javax.swing.JFrame {
         defaultTableModel.addColumn("Phone");
         defaultTableModel.addColumn("Role");
         defaultTableModel.addColumn("Username");
-        
+
         TableUser.setModel(defaultTableModel);
-        
-        
+
         defaultTableModel.setRowCount(0);
         List<User> listUser = new UserDAOImplement().getlistUser();
-        for (User S1: listUser ){
-            Object[] data = {S1.getId(),S1.getName(),S1.getDob(),S1.getGender(),S1.getPhone(),S1.getRole(),S1.getUsername()};
+        for (User S1 : listUser) {
+            Object[] data = {S1.getId(), S1.getName(), S1.getDob(), S1.getGender(), S1.getPhone(), S1.getRole(), S1.getUsername()};
             defaultTableModel.addRow(data);
         }
+        headertable();
     }
 
     /**
@@ -478,7 +481,10 @@ public class UserManageFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void headertable() {
+        JTableHeader thead = TableUser.getTableHeader();
+        thead.setFont(new Font("Tahome", Font.BOLD, 14));
+    }
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
         AdminHomeFrame AHF = new AdminHomeFrame(UserManageFrame.user);
@@ -489,13 +495,13 @@ public class UserManageFrame extends javax.swing.JFrame {
     private void DateofBirthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DateofBirthActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DateofBirthActionPerformed
-    int IDdelete=0;
+    int IDdelete = 0;
     private void btn_listallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_listallActionPerformed
         // TODO add your handling code here:
         defaultTableModel.setRowCount(0);
         List<User> listUser = new UserDAOImplement().getlistUser();
-        for (User S1: listUser ){
-            Object[] data = {S1.getId(),S1.getName(),S1.getDob(),S1.getGender(),S1.getPhone(),S1.getRole(),S1.getUsername()};
+        for (User S1 : listUser) {
+            Object[] data = {S1.getId(), S1.getName(), S1.getDob(), S1.getGender(), S1.getPhone(), S1.getRole(), S1.getUsername()};
             defaultTableModel.addRow(data);
         }
     }//GEN-LAST:event_btn_listallActionPerformed
@@ -510,12 +516,12 @@ public class UserManageFrame extends javax.swing.JFrame {
         Role.setText(null);
         Username.setText(null);
     }//GEN-LAST:event_jLabel13MouseClicked
-    
+
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
         String svname = JOptionPane.showInputDialog("Insert name to find");
-        if(svname.length()==0 || svname==null){
-             JOptionPane.showMessageDialog(this, "Name required");
+        if (svname.length() == 0 || svname == null) {
+            JOptionPane.showMessageDialog(this, "Name required");
         }
         List<User> s1 = new UserDAOImplement().getUserbyUserName(svname);
         if (s1 == null || s1.size() == 0) {
@@ -523,7 +529,7 @@ public class UserManageFrame extends javax.swing.JFrame {
         } else {
             defaultTableModel.setRowCount(0);
             for (User s2 : s1) {
-                Object[] data = {s2.getId(),s2.getName(),s2.getDob(),s2.getGender(),s2.getPhone(),s2.getRole(),s2.getUsername()};
+                Object[] data = {s2.getId(), s2.getName(), s2.getDob(), s2.getGender(), s2.getPhone(), s2.getRole(), s2.getUsername()};
                 defaultTableModel.addRow(data);
             }
 
@@ -532,24 +538,22 @@ public class UserManageFrame extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        int IDS = Integer.parseInt(IDD.getText().trim()) ;
+        int IDS = Integer.parseInt(IDD.getText().trim());
         String Name_user = Name.getText().trim();
         String Dob_user = DateofBirth.getText().trim();
         String Gender_user = Gender.getText().trim();
         String Phone_user = Phone.getText().trim();
         String Role_user = Role.getText().trim();
         String Username_user = Username.getText().trim();
-        
-        
+
         String error = "";
         int Roles = 0;
-        if(Role_user.length()==0){
+        if (Role_user.length() == 0) {
             error += "\n Role required";
-        }else{
+        } else {
             Roles = Integer.parseInt(Role_user);
         }
-      
-        
+
         if (error.length() == 0) {
             User s1 = new User();
             s1.setName(Name_user);
@@ -558,10 +562,9 @@ public class UserManageFrame extends javax.swing.JFrame {
             s1.setPhone(Phone_user);
             s1.setRole(Roles);
             s1.setUsername(Username_user);
-            
-            
-            boolean bl = new UserDAOImplement().updateRoleUser(s1,IDS);
-            if (bl){
+
+            boolean bl = new UserDAOImplement().updateRoleUser(s1, IDS);
+            if (bl) {
                 JOptionPane.showMessageDialog(null, "Update successful");
                 btn_listall.doClick();
                 IDD.setText(null);
@@ -571,10 +574,10 @@ public class UserManageFrame extends javax.swing.JFrame {
                 Phone.setText(null);
                 Role.setText(null);
                 Username.setText(null);
-            }else{                                
+            } else {
                 JOptionPane.showMessageDialog(null, "Update fail");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, error);
         }
     }//GEN-LAST:event_jLabel5MouseClicked
@@ -582,13 +585,13 @@ public class UserManageFrame extends javax.swing.JFrame {
     private void TableUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableUserMouseClicked
         // TODO add your handling code here:
         int row = TableUser.getSelectedRow();
-        IDD.setText(TableUser.getValueAt(row, 0)+"");
-        Name.setText(TableUser.getValueAt(row, 1)+"");
-        DateofBirth.setText(TableUser.getValueAt(row, 2)+"");
-        Gender.setText(TableUser.getValueAt(row, 3)+"");
-        Phone.setText(TableUser.getValueAt(row, 4)+"");
-        Role.setText(TableUser.getValueAt(row, 5)+"");
-        Username.setText(TableUser.getValueAt(row, 6)+"");
+        IDD.setText(TableUser.getValueAt(row, 0) + "");
+        Name.setText(TableUser.getValueAt(row, 1) + "");
+        DateofBirth.setText(TableUser.getValueAt(row, 2) + "");
+        Gender.setText(TableUser.getValueAt(row, 3) + "");
+        Phone.setText(TableUser.getValueAt(row, 4) + "");
+        Role.setText(TableUser.getValueAt(row, 5) + "");
+        Username.setText(TableUser.getValueAt(row, 6) + "");
     }//GEN-LAST:event_TableUserMouseClicked
 
     /**

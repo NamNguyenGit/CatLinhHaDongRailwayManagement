@@ -16,6 +16,7 @@ import Entities.Schedule;
 import DAOImplement.ScheduleDAOimplement;
 import Database.Database_Connect;
 import Entities.User;
+import java.awt.Font;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +25,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -41,31 +44,29 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         conn = Database_Connect.getConnection();
         String sql = "Select * from train ORDER BY train_id ASC";
         try {
-              ps = conn.prepareStatement(sql);
-              rs = ps.executeQuery();
-              while(rs.next()){
-                 Combobox.addItem(rs.getString("train_id"));
-              }
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Combobox.addItem(rs.getString("train_id"));
+            }
         } catch (Exception e) {
         }
     }
     private static User user;
     DefaultTableModel defaultTableModel;
+
     public ScheduleManageFrame(User user) {
         ScheduleManageFrame.user = user;
-         try {
+        try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(ScheduleManageFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
         setLocationRelativeTo(null);
-        
-        
-        
-        
+
         loadcombobox();
-        
+
         defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("ID");
         defaultTableModel.addColumn("Train ID");
@@ -73,16 +74,17 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         defaultTableModel.addColumn("Destination");
         defaultTableModel.addColumn("Departure Time");
         defaultTableModel.addColumn("Departure Date");
-        
+
         TableSchedule.setModel(defaultTableModel);
-        
-        
+
         defaultTableModel.setRowCount(0);
         List<Schedule> listSchedule = new ScheduleDAOimplement().getlistSchedule();
-        for (Schedule S1: listSchedule ){
-            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getDeparture(),S1.getDestination(),S1.getDeparture_time(),Common.formatDate(S1.getDeparture_date())};
+        for (Schedule S1 : listSchedule) {
+            Object[] data = {S1.getId(), S1.getTrain_id(), S1.getDeparture(), S1.getDestination(), S1.getDeparture_time(), Common.formatDate(S1.getDeparture_date())};
             defaultTableModel.addRow(data);
         }
+
+        headertable();
     }
 
     /**
@@ -525,7 +527,10 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void headertable() {
+        JTableHeader thead = TableSchedule.getTableHeader();
+        thead.setFont(new Font("Tahome", Font.BOLD, 14));
+    }
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
         AdminHomeFrame AHF = new AdminHomeFrame(ScheduleManageFrame.user);
@@ -536,7 +541,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
     private void DepartureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DepartureActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DepartureActionPerformed
-    int IDdelete=0;
+    int IDdelete = 0;
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
         String iddelte = JOptionPane.showInputDialog("Insert ID ");
@@ -558,8 +563,8 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         defaultTableModel.setRowCount(0);
         List<Schedule> listSchedule = new ScheduleDAOimplement().getlistSchedule();
-        for (Schedule S1: listSchedule ){
-            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getDeparture(),S1.getDestination(),S1.getDeparture_time(),Common.formatDate(S1.getDeparture_date())};
+        for (Schedule S1 : listSchedule) {
+            Object[] data = {S1.getId(), S1.getTrain_id(), S1.getDeparture(), S1.getDestination(), S1.getDeparture_time(), Common.formatDate(S1.getDeparture_date())};
             defaultTableModel.addRow(data);
         }
     }//GEN-LAST:event_btn_listallActionPerformed
@@ -573,22 +578,22 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         DepartureTime.setText(null);
         jdate.setText(null);
     }//GEN-LAST:event_jLabel13MouseClicked
-    int IDtrain = 0 ;
+    int IDtrain = 0;
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
         String svname = JOptionPane.showInputDialog("Insert Train ID to find");
-        if(svname.length()==0 || svname == null){
+        if (svname.length() == 0 || svname == null) {
             JOptionPane.showMessageDialog(this, "Train ID required");
         }
         IDtrain = Integer.parseInt(svname);
         List<Schedule> s1 = new ScheduleDAOimplement().getSchedulesbyTrainID(IDtrain);
-        
+
         if (s1 == null || s1.size() == 0) {
             JOptionPane.showMessageDialog(this, "We dont have train with ID " + IDtrain + " here");
         } else {
             defaultTableModel.setRowCount(0);
             for (Schedule s2 : s1) {
-                Object[] data = {s2.getId(),s2.getTrain_id(),s2.getDeparture(),s2.getDestination(),s2.getDeparture_time(),Common.formatDate(s2.getDeparture_date())};
+                Object[] data = {s2.getId(), s2.getTrain_id(), s2.getDeparture(), s2.getDestination(), s2.getDeparture_time(), Common.formatDate(s2.getDeparture_date())};
                 defaultTableModel.addRow(data);
             }
 
@@ -602,35 +607,35 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         String Destinationt = Destination.getText().trim();
         String DeparturetT = DepartureTime.getText().trim();
         String DeparturetD = jdate.getText().trim();
-        
+
         String error = "";
         int Train_ID = 0;
-        if(Train_id.length()==0){
+        if (Train_id.length() == 0) {
             error += "\n Train ID required";
-        }else{
-             Train_ID = Integer.parseInt(Train_id);
+        } else {
+            Train_ID = Integer.parseInt(Train_id);
         }
-       
-        if(Departuret.length()==0){
+
+        if (Departuret.length() == 0) {
             error += "\n Departure ID required";
         }
-        if(Destinationt.length()==0){
+        if (Destinationt.length() == 0) {
             error += "\n Destination ID required";
         }
-        if(DeparturetT.length()==0){
+        if (DeparturetT.length() == 0) {
             error += "\n Departure Time  required";
         }
-        Date exDate = null; 
-        if(DeparturetD.length()==0){
+        Date exDate = null;
+        if (DeparturetD.length() == 0) {
             error += "\n Departure Date required";
-        }else{
+        } else {
             SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
             try {
                 exDate = sf.parse(DeparturetD);
             } catch (ParseException ex) {
                 error += "\n  Date format dd/MM/yyyy";
             }
-            
+
         }
 
         if (error.length() == 0) {
@@ -640,7 +645,6 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
             s1.setDestination(Destinationt);
             s1.setDeparture_time(DeparturetT);
             s1.setDeparture_date(exDate);
-           
 
             boolean bl = new ScheduleDAOimplement().insertSchedule(s1);
             if (bl) {
@@ -666,49 +670,48 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, error);
         }
-        
-        
+
+
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         int IDS = Integer.parseInt(IDD.getText().trim());
-         String Train_id = (String) Combobox.getSelectedItem();
+        String Train_id = (String) Combobox.getSelectedItem();
         String Departuret = Departure.getText().trim();
         String Destinationt = Destination.getText().trim();
         String DeparturetT = DepartureTime.getText().trim();
         String DeparturetD = jdate.getText().trim();
         String error = "";
         int Train_ID = 0;
-        if(Train_id.length()==0){
+        if (Train_id.length() == 0) {
             error += "\n Train ID required";
-        }else{
-             Train_ID = Integer.parseInt(Train_id);
+        } else {
+            Train_ID = Integer.parseInt(Train_id);
         }
-       
-        if(Departuret.length()==0){
+
+        if (Departuret.length() == 0) {
             error += "\n Departure ID required";
         }
-        if(Destinationt.length()==0){
+        if (Destinationt.length() == 0) {
             error += "\n Destination ID required";
         }
-        if(DeparturetT.length()==0){
+        if (DeparturetT.length() == 0) {
             error += "\n Departure Time  required";
         }
-        Date exDate = null; 
-        if(DeparturetD.length()==0){
+        Date exDate = null;
+        if (DeparturetD.length() == 0) {
             error += "\n Departure Date required";
-        }else{
+        } else {
             SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
             try {
                 exDate = sf.parse(DeparturetD);
             } catch (ParseException ex) {
                 error += "\n  Date format dd/MM/yyyy";
             }
-            
+
         }
-        
-        
+
         if (error.length() == 0) {
             Schedule s1 = new Schedule();
             s1.setTrain_id(Train_ID);
@@ -716,10 +719,9 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
             s1.setDestination(Destinationt);
             s1.setDeparture_time(DeparturetT);
             s1.setDeparture_date(exDate);
-            
-          
-            boolean bl = new ScheduleDAOimplement().updateSchedule(s1,IDS);
-            if (bl){
+
+            boolean bl = new ScheduleDAOimplement().updateSchedule(s1, IDS);
+            if (bl) {
                 JOptionPane.showMessageDialog(null, "Update successful");
                 btn_listall.doClick();
                 IDD.setText(null);
@@ -728,10 +730,10 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
                 Destination.setText(null);
                 DepartureTime.setText(null);
                 jdate.setText(null);
-            }else{               
+            } else {
                 JOptionPane.showMessageDialog(null, "Update fail");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, error);
         }
     }//GEN-LAST:event_jLabel5MouseClicked
@@ -739,12 +741,12 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
     private void TableScheduleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableScheduleMouseClicked
         // TODO add your handling code here:
         int row = TableSchedule.getSelectedRow();
-        IDD.setText(TableSchedule.getValueAt(row, 0)+"");
-        Combobox.setSelectedItem(TableSchedule.getValueAt(row, 1)+"");
-        Departure.setText(TableSchedule.getValueAt(row, 2)+"");
-        Destination.setText(TableSchedule.getValueAt(row, 3)+"");
-        DepartureTime.setText(TableSchedule.getValueAt(row, 4)+"");
-        jdate.setText(TableSchedule.getValueAt(row, 5)+"");
+        IDD.setText(TableSchedule.getValueAt(row, 0) + "");
+        Combobox.setSelectedItem(TableSchedule.getValueAt(row, 1) + "");
+        Departure.setText(TableSchedule.getValueAt(row, 2) + "");
+        Destination.setText(TableSchedule.getValueAt(row, 3) + "");
+        DepartureTime.setText(TableSchedule.getValueAt(row, 4) + "");
+        jdate.setText(TableSchedule.getValueAt(row, 5) + "");
     }//GEN-LAST:event_TableScheduleMouseClicked
 
     /**

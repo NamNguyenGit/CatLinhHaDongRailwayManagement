@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import DAOImplement.TicketDAOImplement;
 import java.util.Date;
+
 /**
  *
  * @author acer
@@ -29,7 +30,8 @@ public class BuyTicket1dayFrames extends javax.swing.JFrame {
      */
     private static User user;
     private static Date Expire_date;
-    public BuyTicket1dayFrames(java.util.Date Expire_date,User user) {
+
+    public BuyTicket1dayFrames(java.util.Date Expire_date, User user) {
         BuyTicket1dayFrames.Expire_date = (Date) Expire_date;
         BuyTicket1dayFrames.user = user;
         try {
@@ -39,20 +41,17 @@ public class BuyTicket1dayFrames extends javax.swing.JFrame {
         }
         initComponents();
         setLocationRelativeTo(null);
-        
+
         name.setText(BuyTicket1dayFrames.user.getName());
         renewdate.setText("Daily Ticket Doesn't Have Renew Date");
-       
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String date = dateFormat.format(BuyTicket1dayFrames.Expire_date);
         datebuy.setText(date);
         ExDate.setText(date);
         price.setText("30.000");
-        
-        
-    }
 
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -311,61 +310,56 @@ public class BuyTicket1dayFrames extends javax.swing.JFrame {
         String PurchaseDate = datebuy.getText().trim();
         String ExpireDate = ExDate.getText().trim();
         String Price = price.getText().trim();
-        
-        
+
         String error = "";
-        
-        if(Name_user.length()==0){
+
+        if (Name_user.length() == 0) {
             error += "\n Name required";
         }
-        
+
         java.util.Date renwedate = null;
-        
-        
-        java.util.Date perchasedate = null; 
-        if(PurchaseDate.length()==0){
+
+        java.util.Date perchasedate = null;
+        if (PurchaseDate.length() == 0) {
             error += "\n Purchase date required";
-        }else{
+        } else {
             SimpleDateFormat sf1 = new SimpleDateFormat("dd/MM/yyyy");
             try {
                 perchasedate = sf1.parse(PurchaseDate);
             } catch (ParseException ex) {
                 error += "\n  Date format dd/MM/yyyy";
             }
-            
+
         }
         Date exDate = null;
-        if(ExpireDate.length()==0){
+        if (ExpireDate.length() == 0) {
             error += "\n Expire date required";
-        }else{
+        } else {
             SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
             try {
                 exDate = sf.parse(ExpireDate);
             } catch (ParseException ex) {
                 error += "\n  Date format dd/MM/yyyy";
             }
-            
+
         }
         float cost = 0;
-        if(Price.length()==0){
+        if (Price.length() == 0) {
             error += "\n Price required";
-        }else{
+        } else {
             cost = Float.parseFloat(Price);
         }
-        
-      
+
         if (error.length() == 0) {
             Ticket s1 = new Ticket();
             s1.setUser_id(BuyTicket1dayFrames.user.getId());
             s1.setDate_buy(perchasedate);
             s1.setExpire_date(exDate);
             s1.setPrice(cost);
-           
-           
-           
+
             boolean bl = new TicketDAOImplement().insertTicket(s1);
             if (bl) {
-               
+
                 JOptionPane.showMessageDialog(this, "Have a nice trip !!!");
                 ShowTicketS1dayFrame STF = new ShowTicketS1dayFrame(BuyTicket1dayFrames.user);
                 STF.show();
@@ -377,8 +371,8 @@ public class BuyTicket1dayFrames extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, error);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -412,7 +406,7 @@ public class BuyTicket1dayFrames extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BuyTicket1dayFrames(BuyTicket1dayFrames.Expire_date,BuyTicket1dayFrames.user).setVisible(true);
+                new BuyTicket1dayFrames(BuyTicket1dayFrames.Expire_date, BuyTicket1dayFrames.user).setVisible(true);
             }
         });
     }

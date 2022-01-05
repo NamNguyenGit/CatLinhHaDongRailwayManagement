@@ -38,22 +38,23 @@ public class HistoryPerchaseFrame extends javax.swing.JFrame {
      */
     DefaultTableModel defaultTableModel;
     private static User user;
-    public  String formatDate(Date date){
-        Locale local = new Locale("vi","VN");
+
+    public String formatDate(Date date) {
+        Locale local = new Locale("vi", "VN");
         SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", local);
         return df.format(date);
     }
+
     public HistoryPerchaseFrame(User user) {
         HistoryPerchaseFrame.user = user;
-         try {
+        try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(HistoryPerchaseFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
         setLocationRelativeTo(null);
-        
-        
+
         defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("ID Ticket");
         defaultTableModel.addColumn("Name");
@@ -61,26 +62,20 @@ public class HistoryPerchaseFrame extends javax.swing.JFrame {
         defaultTableModel.addColumn("Buy Date");
         defaultTableModel.addColumn("Expire Date");
         defaultTableModel.addColumn("Price");
-        
-        
+
         TablePerchase.setModel(defaultTableModel);
-        
-        
-        
+
         defaultTableModel.setRowCount(0);
         List<Ticket> listTicket = new UserDAOImplement().getTicketbyUserid(user);
-        for (Ticket S1: listTicket ){
+        for (Ticket S1 : listTicket) {
             String name = user.getName();
             S1.setUser_name(name);
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-            Object[] data = {S1.getId(),S1.getUser_name(),S1.getRenew_date() == null ? "Daily Ticket Doesn't Have Renew Date" : df.format(S1.getRenew_date()),df.format(S1.getDate_buy()),df.format(S1.getExpire_date()),Common.formatNumber(S1.getPrice())};
+            Object[] data = {S1.getId(), S1.getUser_name(), S1.getRenew_date() == null ? "Daily Ticket Doesn't Have Renew Date" : df.format(S1.getRenew_date()), df.format(S1.getDate_buy()), df.format(S1.getExpire_date()), Common.formatNumber(S1.getPrice())};
             defaultTableModel.addRow(data);
         }
         headertable();
-        
-        
-        
-        
+
     }
 
     /**
@@ -191,11 +186,11 @@ public class HistoryPerchaseFrame extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    private void headertable(){
+    private void headertable() {
         JTableHeader thead = TablePerchase.getTableHeader();
-        
-        thead.setFont(new Font("Tahome", Font.BOLD,14));
-     
+
+        thead.setFont(new Font("Tahome", Font.BOLD, 14));
+
         TableColumn col1 = TablePerchase.getColumnModel().getColumn(0);
         col1.setPreferredWidth(80);
         TableColumn col2 = TablePerchase.getColumnModel().getColumn(1);
@@ -209,6 +204,7 @@ public class HistoryPerchaseFrame extends javax.swing.JFrame {
         TableColumn col6 = TablePerchase.getColumnModel().getColumn(5);
         col6.setPreferredWidth(116);
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -251,5 +247,4 @@ public class HistoryPerchaseFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 
-    
 }

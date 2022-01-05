@@ -13,6 +13,7 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import Entities.User;
 import DAOImplement.UserDAOImplement;
+
 /**
  *
  * @author acer
@@ -23,7 +24,7 @@ public class RegisterFrame extends javax.swing.JFrame {
      * Creates new form ClientLoginFrame
      */
     public RegisterFrame() {
-         try {
+        try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(RegisterFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -164,26 +165,26 @@ public class RegisterFrame extends javax.swing.JFrame {
         String Phone_user = Phone.getText().trim();
         String Username_user = username.getText().trim();
         String Password_user = password.getText().trim();
-        
+
         String error = "";
-       
-        if(Name_user.length()==0){
+
+        if (Name_user.length() == 0) {
             error += "\n Name required";
         }
-       
-        if(dateofbirth.length()==0){
+
+        if (dateofbirth.length() == 0) {
             error += "\n Date of birth required";
         }
-        if(Gender_user.length()==0){
+        if (Gender_user.length() == 0) {
             error += "\n Gender required";
         }
-        if(Phone_user.length()==0){
+        if (Phone_user.length() == 0) {
             error += "\n Phone  required";
         }
-        if(Username_user.length()==0){
+        if (Username_user.length() == 0) {
             error += "\n Username required";
         }
-        if(Password_user.length()==0){
+        if (Password_user.length() == 0) {
             error += "\n Password required";
         }
 
@@ -195,23 +196,21 @@ public class RegisterFrame extends javax.swing.JFrame {
             s1.setPhone(Phone_user);
             s1.setUsername(Username_user);
             s1.setPassword(Password_user);
-           
 
             boolean bl = new UserDAOImplement().insertUser(s1);
             if (bl) {
                 JOptionPane.showMessageDialog(this, "Welcome to Cat Linh Ha Dong Overhead Railway");
-                
+
                 Name.setText(null);
                 dob.setText(null);
                 gender.setText(null);
                 Phone.setText(null);
                 username.setText(null);
                 password.setText(null);
-                
+
                 ClientLoginFrame CLF = new ClientLoginFrame();
                 CLF.show();
                 dispose();
-                
 
             } else {
                 JOptionPane.showMessageDialog(null, "Opps something went wrong !!");

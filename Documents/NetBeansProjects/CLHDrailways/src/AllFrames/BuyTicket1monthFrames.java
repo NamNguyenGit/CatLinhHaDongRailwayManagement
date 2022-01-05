@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
 import DAOImplement.TicketDAOImplement;
 import java.util.Calendar;
 import java.util.Date;
+
 /**
  *
  * @author acer
@@ -30,7 +31,8 @@ public class BuyTicket1monthFrames extends javax.swing.JFrame {
      */
     private static User user;
     private static Date Expire_date;
-    public BuyTicket1monthFrames(java.util.Date Expire_date,User user) {
+
+    public BuyTicket1monthFrames(java.util.Date Expire_date, User user) {
         BuyTicket1monthFrames.Expire_date = (Date) Expire_date;
         BuyTicket1monthFrames.user = user;
         try {
@@ -40,40 +42,31 @@ public class BuyTicket1monthFrames extends javax.swing.JFrame {
         }
         initComponents();
         setLocationRelativeTo(null);
-        
+
         name.setText(BuyTicket1monthFrames.user.getName());
         renewdatetxt.setText(null);
-       
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String date = dateFormat.format(BuyTicket1monthFrames.Expire_date);
-       
-        
+
         Calendar cal = Calendar.getInstance();
         cal.setTime(Expire_date);
         cal.add(Calendar.MONTH, 1);
         Date Expriedate = cal.getTime();
         String expriedate = dateFormat.format(Expriedate);
-        
+
         Calendar cal2 = Calendar.getInstance();
         cal2.setTime(Expriedate);
         cal2.add(Calendar.DATE, 1);
         Date Renewdate = cal2.getTime();
         String renewdate = dateFormat.format(Renewdate);
-        
+
         renewdatetxt.setText(renewdate);
         datebuy.setText(date);
         ExDate.setText(expriedate);
         price.setText("200.000");
-        
-        
-        
-        
-        
-        
-        
-    }
 
-    
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -332,60 +325,57 @@ public class BuyTicket1monthFrames extends javax.swing.JFrame {
         String PurchaseDate = datebuy.getText().trim();
         String ExpireDate = ExDate.getText().trim();
         String Price = price.getText().trim();
-        
-        
+
         String error = "";
-        
-        if(Name_user.length()==0){
+
+        if (Name_user.length() == 0) {
             error += "\n Name required";
         }
-        
+
         java.util.Date renwedate = null;
-        if(RenewDate.length()==0){
+        if (RenewDate.length() == 0) {
             error += "\n Renewdate required";
-        }else{
+        } else {
             SimpleDateFormat sf1 = new SimpleDateFormat("dd/MM/yyyy");
             try {
                 renwedate = sf1.parse(RenewDate);
             } catch (ParseException ex) {
                 error += "\n  Date format dd/MM/yyyy";
             }
-            
+
         }
-        
-        
-        java.util.Date perchasedate = null; 
-        if(PurchaseDate.length()==0){
+
+        java.util.Date perchasedate = null;
+        if (PurchaseDate.length() == 0) {
             error += "\n Purchase date required";
-        }else{
+        } else {
             SimpleDateFormat sf1 = new SimpleDateFormat("dd/MM/yyyy");
             try {
                 perchasedate = sf1.parse(PurchaseDate);
             } catch (ParseException ex) {
                 error += "\n  Date format dd/MM/yyyy";
             }
-            
+
         }
         Date exDate = null;
-        if(ExpireDate.length()==0){
+        if (ExpireDate.length() == 0) {
             error += "\n Expire date required";
-        }else{
+        } else {
             SimpleDateFormat sf = new SimpleDateFormat("dd/MM/yyyy");
             try {
                 exDate = sf.parse(ExpireDate);
             } catch (ParseException ex) {
                 error += "\n  Date format dd/MM/yyyy";
             }
-            
+
         }
         float cost = 0;
-        if(Price.length()==0){
+        if (Price.length() == 0) {
             error += "\n Price required";
-        }else{
+        } else {
             cost = Float.parseFloat(Price);
         }
-        
-      
+
         if (error.length() == 0) {
             Ticket s1 = new Ticket();
             s1.setUser_id(BuyTicket1monthFrames.user.getId());
@@ -393,9 +383,7 @@ public class BuyTicket1monthFrames extends javax.swing.JFrame {
             s1.setRenew_date(renwedate);
             s1.setExpire_date(exDate);
             s1.setPrice(cost);
-           
-           
-           
+
             boolean bl = new TicketDAOImplement().insertTicket2(s1);
             if (bl) {
                 JOptionPane.showMessageDialog(this, "Have a nice trip !!!");
@@ -409,8 +397,8 @@ public class BuyTicket1monthFrames extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, error);
         }
-        
-        
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -446,7 +434,7 @@ public class BuyTicket1monthFrames extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BuyTicket1monthFrames(BuyTicket1monthFrames.Expire_date,BuyTicket1monthFrames.user).setVisible(true);
+                new BuyTicket1monthFrames(BuyTicket1monthFrames.Expire_date, BuyTicket1monthFrames.user).setVisible(true);
             }
         });
     }

@@ -18,6 +18,10 @@ import javax.swing.JOptionPane;
 import Entities.Train;
 import DAOImplement.TrainDAOImplement;
 import Entities.User;
+import java.awt.Font;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
+
 /**
  *
  * @author acer
@@ -29,31 +33,32 @@ public class TrainManageFrame extends javax.swing.JFrame {
      */
     private static User user;
     DefaultTableModel defaultTableModel;
+
     public TrainManageFrame(User user) {
         TrainManageFrame.user = user;
-         try {
+        try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(TrainManageFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
         setLocationRelativeTo(null);
-        
+
         defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("ID");
         defaultTableModel.addColumn("Train ID");
         defaultTableModel.addColumn("Status");
-        
-        
+
         TableTrain.setModel(defaultTableModel);
-        
-        
+
         defaultTableModel.setRowCount(0);
         List<Train> listTrain = new TrainDAOImplement().getlistTrain();
-        for (Train S1: listTrain ){
-            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getStatus() };
+        for (Train S1 : listTrain) {
+            Object[] data = {S1.getId(), S1.getTrain_id(), S1.getStatus()};
             defaultTableModel.addRow(data);
         }
+
+        headertable();
     }
 
     /**
@@ -416,7 +421,10 @@ public class TrainManageFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void headertable() {
+        JTableHeader thead = TableTrain.getTableHeader();
+        thead.setFont(new Font("Tahome", Font.BOLD, 14));
+    }
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:
         AdminHomeFrame AHF = new AdminHomeFrame(TrainManageFrame.user);
@@ -427,7 +435,7 @@ public class TrainManageFrame extends javax.swing.JFrame {
     private void StatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_StatusActionPerformed
-    int IDdelete=0;
+    int IDdelete = 0;
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
         String iddelte = JOptionPane.showInputDialog("Insert ID ");
@@ -449,8 +457,8 @@ public class TrainManageFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         defaultTableModel.setRowCount(0);
         List<Train> listTrain = new TrainDAOImplement().getlistTrain();
-        for (Train S1: listTrain ){
-            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getStatus()};
+        for (Train S1 : listTrain) {
+            Object[] data = {S1.getId(), S1.getTrain_id(), S1.getStatus()};
             defaultTableModel.addRow(data);
         }
     }//GEN-LAST:event_btn_listallActionPerformed
@@ -460,24 +468,24 @@ public class TrainManageFrame extends javax.swing.JFrame {
         IDD.setText(null);
         TrainID.setText(null);
         Status.setText(null);
-        
+
     }//GEN-LAST:event_jLabel13MouseClicked
-    int IDtrain = 0 ;
+    int IDtrain = 0;
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
         String svname = JOptionPane.showInputDialog("Insert Train ID to find");
-        if(svname.length()==0 || svname == null){
+        if (svname.length() == 0 || svname == null) {
             JOptionPane.showMessageDialog(this, "Train ID required");
         }
         IDtrain = Integer.parseInt(svname);
         List<Train> s1 = new TrainDAOImplement().getTrainbyTrainID(IDtrain);
-        
+
         if (s1 == null || s1.size() == 0) {
             JOptionPane.showMessageDialog(this, "We dont have train with ID " + IDtrain + " here");
         } else {
             defaultTableModel.setRowCount(0);
             for (Train s2 : s1) {
-                Object[] data = {s2.getId(),s2.getTrain_id(),s2.getStatus()};
+                Object[] data = {s2.getId(), s2.getTrain_id(), s2.getStatus()};
                 defaultTableModel.addRow(data);
             }
 
@@ -488,29 +496,25 @@ public class TrainManageFrame extends javax.swing.JFrame {
         // TODO add your handling code here
         String Train_id = TrainID.getText().trim();
         String Statuss = Status.getText().trim();
-        
-        
+
         String error = "";
         int Train_ID = 0;
-        if(Train_id.length()==0){
+        if (Train_id.length() == 0) {
             error += "\n Train ID required";
-        }else{
-             Train_ID = Integer.parseInt(Train_id);
+        } else {
+            Train_ID = Integer.parseInt(Train_id);
         }
         int Status_Train = 0;
-        if(Statuss.length()==0){
+        if (Statuss.length() == 0) {
             error += "\n Status ID required";
-        }else{
-             Status_Train = Integer.parseInt(Statuss);
+        } else {
+            Status_Train = Integer.parseInt(Statuss);
         }
-        
 
         if (error.length() == 0) {
             Train s1 = new Train();
             s1.setTrain_id(Train_ID);
             s1.setStatus(Status_Train);
-           
-           
 
             boolean bl = new TrainDAOImplement().insertTrain(s1);
             if (bl) {
@@ -524,57 +528,54 @@ public class TrainManageFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Add fail");
                 TrainID.setText(null);
                 Status.setText(null);
-               
+
                 btn_listall.doClick();
             }
 
         } else {
             JOptionPane.showMessageDialog(null, error);
         }
-        
-        
+
+
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        int IDS = Integer.parseInt(IDD.getText().trim()) ;
+        int IDS = Integer.parseInt(IDD.getText().trim());
         String Train_id = TrainID.getText().trim();
         String Statuss = Status.getText().trim();
-        
-        
+
         String error = "";
         int Train_ID = 0;
-        if(Train_id.length()==0){
+        if (Train_id.length() == 0) {
             error += "\n Train ID required";
-        }else{
+        } else {
             Train_ID = Integer.parseInt(Train_id);
         }
         int Status_Train = 0;
-        if(Statuss.length()==0){
+        if (Statuss.length() == 0) {
             error += "\n Status ID required";
-        }else{
-             Status_Train = Integer.parseInt(Statuss);
+        } else {
+            Status_Train = Integer.parseInt(Statuss);
         }
-              
+
         if (error.length() == 0) {
             Train s1 = new Train();
             s1.setTrain_id(Train_ID);
             s1.setStatus(Status_Train);
-           
-           
-            
-            boolean bl = new TrainDAOImplement().updateTrain(s1,IDS);
-            if (bl){
+
+            boolean bl = new TrainDAOImplement().updateTrain(s1, IDS);
+            if (bl) {
                 JOptionPane.showMessageDialog(null, "Update successful");
                 btn_listall.doClick();
                 IDD.setText(null);
                 TrainID.setText(null);
                 Status.setText(null);
-                
-            }else{                               
+
+            } else {
                 JOptionPane.showMessageDialog(null, "Update fail");
             }
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, error);
         }
     }//GEN-LAST:event_jLabel5MouseClicked
@@ -582,10 +583,10 @@ public class TrainManageFrame extends javax.swing.JFrame {
     private void TableTrainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TableTrainMouseClicked
         // TODO add your handling code here:
         int row = TableTrain.getSelectedRow();
-        IDD.setText(TableTrain.getValueAt(row, 0)+"");
-        TrainID.setText(TableTrain.getValueAt(row, 1)+"");
-        Status.setText(TableTrain.getValueAt(row, 2)+"");
-       
+        IDD.setText(TableTrain.getValueAt(row, 0) + "");
+        TrainID.setText(TableTrain.getValueAt(row, 1) + "");
+        Status.setText(TableTrain.getValueAt(row, 2) + "");
+
     }//GEN-LAST:event_TableTrainMouseClicked
 
     /**

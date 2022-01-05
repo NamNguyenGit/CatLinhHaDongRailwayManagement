@@ -32,6 +32,7 @@ public class AdminHomeFrame extends javax.swing.JFrame {
      * Creates new form AdminHomeFrame
      */
     private static User user;
+
     public AdminHomeFrame(User user) {
         AdminHomeFrame.user = user;
         try {
@@ -41,28 +42,26 @@ public class AdminHomeFrame extends javax.swing.JFrame {
         }
         initComponents();
         setLocationRelativeTo(null);
-        
+
         Username.setText("Hi Admin " + AdminHomeFrame.user.getName());
-        
+
         ActionListener actionListener = new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = new Date();
                 DATE.setText(df.format(date));
-                
+
                 Date date1 = new Date();
                 DateFormat dtf = new SimpleDateFormat("HH:mm:ss");
                 String time = dtf.format(date);
                 TIME.setText(time);
-             }
-         };
-        Timer timer = new Timer(1000,actionListener);
+            }
+        };
+        Timer timer = new Timer(1000, actionListener);
         timer.setInitialDelay(0);
         timer.start();
     }
-
-   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -304,7 +303,7 @@ public class AdminHomeFrame extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-         
+
         ScheduleManageFrame SMF = new ScheduleManageFrame(AdminHomeFrame.user);
         SMF.show();
         dispose();

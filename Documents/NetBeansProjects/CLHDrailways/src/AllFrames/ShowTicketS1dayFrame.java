@@ -26,6 +26,7 @@ import DAOImplement.ScheduleDAOimplement;
 import java.awt.Font;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
+
 /**
  *
  * @author acer
@@ -37,17 +38,17 @@ public class ShowTicketS1dayFrame extends javax.swing.JFrame {
      */
     private static User user;
     DefaultTableModel defaultTableModel;
+
     public ShowTicketS1dayFrame(User user) {
         ShowTicketS1dayFrame.user = user;
-         try {
+        try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
             Logger.getLogger(ShowTicketS1dayFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
         setLocationRelativeTo(null);
-        
-        
+
         defaultTableModel = new DefaultTableModel();
         defaultTableModel.addColumn("ID");
         defaultTableModel.addColumn("Train ID");
@@ -56,41 +57,37 @@ public class ShowTicketS1dayFrame extends javax.swing.JFrame {
         defaultTableModel.addColumn("Departure Time");
         defaultTableModel.addColumn("Departure Date");
         defaultTableModel.addColumn("Train Status");
-        
+
         TableSchedule.setModel(defaultTableModel);
-        
-        
+
         defaultTableModel.setRowCount(0);
         List<Schedule> listSchedule = new ScheduleDAOimplement().getlistSchedule();
-        for (Schedule S1: listSchedule ){
+        for (Schedule S1 : listSchedule) {
             int status_train = new ScheduleDAOimplement().getstatusbyTrainID(S1.getTrain_id());
             S1.setTrain_status(status_train);
-            Object[] data = {S1.getId(),S1.getTrain_id(),S1.getDeparture(),S1.getDestination(),S1.getDeparture_time(),Common.formatDate(S1.getDeparture_date()),S1.getTrain_status() == 1 ? "Active" : "Busy"};
+            Object[] data = {S1.getId(), S1.getTrain_id(), S1.getDeparture(), S1.getDestination(), S1.getDeparture_time(), Common.formatDate(S1.getDeparture_date()), S1.getTrain_status() == 1 ? "Active" : "Busy"};
             defaultTableModel.addRow(data);
         }
-        
+
         ActionListener actionListener = new ActionListener() {
-             @Override
-             public void actionPerformed(ActionEvent e) {
+            @Override
+            public void actionPerformed(ActionEvent e) {
                 SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = new Date();
                 DATE.setText(df.format(date));
-                
+
                 Date date1 = new Date();
                 DateFormat dtf = new SimpleDateFormat("HH:mm:ss");
                 String time = dtf.format(date);
                 TIME.setText(time);
-             }
-         };
-        Timer timer = new Timer(1000,actionListener);
+            }
+        };
+        Timer timer = new Timer(1000, actionListener);
         timer.setInitialDelay(0);
         timer.start();
-        
+
         headertable();
-        
-        
-        
-        
+
     }
 
     /**
@@ -231,25 +228,9 @@ public class ShowTicketS1dayFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    private void headertable(){
+    private void headertable() {
         JTableHeader thead = TableSchedule.getTableHeader();
-        
-        thead.setFont(new Font("Tahome", Font.BOLD,14));
-     
-        TableColumn col1 = TableSchedule.getColumnModel().getColumn(0);
-        col1.setPreferredWidth(80);
-        TableColumn col2 = TableSchedule.getColumnModel().getColumn(1);
-        col2.setPreferredWidth(120);
-        TableColumn col3 = TableSchedule.getColumnModel().getColumn(2);
-        col3.setPreferredWidth(230);
-        TableColumn col4 = TableSchedule.getColumnModel().getColumn(3);
-        col4.setPreferredWidth(110);
-        TableColumn col5 = TableSchedule.getColumnModel().getColumn(4);
-        col5.setPreferredWidth(110);
-        TableColumn col6 = TableSchedule.getColumnModel().getColumn(5);
-        col6.setPreferredWidth(116);
-        TableColumn col7 = TableSchedule.getColumnModel().getColumn(6);
-        col7.setPreferredWidth(116);
+        thead.setFont(new Font("Tahome", Font.BOLD, 14));
     }
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
@@ -264,8 +245,8 @@ public class ShowTicketS1dayFrame extends javax.swing.JFrame {
         String Train_id = TableSchedule.getModel().getValueAt(row, 1).toString();
         int train_id = Integer.parseInt(Train_id);
         Date Expire_date = new ScheduleDAOimplement().getDateBuybyTrainID(train_id);
-        
-        BuyTicket1dayFrames BTF = new BuyTicket1dayFrames(Expire_date,ShowTicketS1dayFrame.user);
+
+        BuyTicket1dayFrames BTF = new BuyTicket1dayFrames(Expire_date, ShowTicketS1dayFrame.user);
         BTF.show();
         dispose();
     }//GEN-LAST:event_TableScheduleMouseClicked
