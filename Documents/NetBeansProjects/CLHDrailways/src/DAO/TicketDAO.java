@@ -5,6 +5,7 @@
  */
 package DAO;
 import Entities.Ticket;
+import java.util.List;
 /**
  *
  * @author acer
@@ -12,4 +13,5 @@ import Entities.Ticket;
 public interface TicketDAO {
     public boolean insertTicket(Ticket T1);
     public boolean insertTicket2(Ticket T1);
+   
 }

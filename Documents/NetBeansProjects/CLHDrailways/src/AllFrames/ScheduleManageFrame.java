@@ -314,6 +314,7 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        TableSchedule.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         TableSchedule.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TableScheduleMouseClicked(evt);
@@ -530,6 +531,20 @@ public class ScheduleManageFrame extends javax.swing.JFrame {
     private void headertable() {
         JTableHeader thead = TableSchedule.getTableHeader();
         thead.setFont(new Font("Tahome", Font.BOLD, 14));
+        
+        TableColumn col1 = TableSchedule.getColumnModel().getColumn(0);
+        col1.setPreferredWidth(80);
+        TableColumn col2 = TableSchedule.getColumnModel().getColumn(1);
+        col2.setPreferredWidth(80);
+        TableColumn col3 = TableSchedule.getColumnModel().getColumn(2);
+        col3.setPreferredWidth(130);
+        TableColumn col4 = TableSchedule.getColumnModel().getColumn(3);
+        col4.setPreferredWidth(130);
+        TableColumn col5 = TableSchedule.getColumnModel().getColumn(4);
+        col5.setPreferredWidth(130);
+        TableColumn col6 = TableSchedule.getColumnModel().getColumn(5);
+        col6.setPreferredWidth(120);
+        
     }
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         // TODO add your handling code here:

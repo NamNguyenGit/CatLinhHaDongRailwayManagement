@@ -233,9 +233,40 @@ public class UserDAOImplement implements UserDAO{
 
         return listTicket;
     }
-    
 
-    
-    
-    
+    @Override
+    public List<Ticket> getBuydatebyName(User T1) {
+       List<Ticket> listsTicket = new ArrayList<>();
+
+
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        conn = Database_Connect.getConnection();
+        try {
+            ps = conn.prepareStatement("select * from ticket where user_id = ?");
+            ps.setInt(1,T1.getId());
+            rs = ps.executeQuery();
+            while (rs.next()){
+                Ticket S1 = new Ticket();
+                S1.setId(rs.getInt("ID"));
+                S1.setUser_id(rs.getInt("User_id"));
+                S1.setRenew_date(rs.getDate("Renewabledate"));
+                S1.setDate_buy(rs.getDate("Buydate"));
+                S1.setExpire_date(rs.getDate("Expirationdate"));
+                S1.setPrice(rs.getFloat("Price"));
+                listsTicket.add(S1);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Database_Connect.closeAll(conn,ps,rs);
+        }
+
+
+        return listsTicket;
+    }
+ 
 }

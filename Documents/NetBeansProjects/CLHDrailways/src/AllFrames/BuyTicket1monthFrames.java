@@ -17,8 +17,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import DAOImplement.TicketDAOImplement;
+import DAOImplement.UserDAOImplement;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -376,26 +380,38 @@ public class BuyTicket1monthFrames extends javax.swing.JFrame {
             cost = Float.parseFloat(Price);
         }
 
-        if (error.length() == 0) {
-            Ticket s1 = new Ticket();
-            s1.setUser_id(BuyTicket1monthFrames.user.getId());
-            s1.setDate_buy(perchasedate);
-            s1.setRenew_date(renwedate);
-            s1.setExpire_date(exDate);
-            s1.setPrice(cost);
+        //check can't buy same ticket
+        List<Ticket> listTicket = new UserDAOImplement().getBuydatebyName(user);
+        List<Date> listdateticket = listTicket.stream().map(Ticket::getDate_buy).collect(Collectors.toCollection(ArrayList::new));
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 
-            boolean bl = new TicketDAOImplement().insertTicket2(s1);
-            if (bl) {
-                JOptionPane.showMessageDialog(this, "Have a nice trip !!!");
-                ShowTicketSFrame STF1 = new ShowTicketSFrame(BuyTicket1monthFrames.user);
-                STF1.show();
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Opps Something went wrong !!");
-            }
-
+        if (listdateticket.contains(perchasedate)) {
+            JOptionPane.showMessageDialog(this, "You already have the ticket");
+            ShowTicketSFrame STF1 = new ShowTicketSFrame(BuyTicket1monthFrames.user);
+            STF1.show();
+            dispose();
         } else {
-            JOptionPane.showMessageDialog(null, error);
+            if (error.length() == 0) {
+                Ticket s1 = new Ticket();
+                s1.setUser_id(BuyTicket1monthFrames.user.getId());
+                s1.setDate_buy(perchasedate);
+                s1.setRenew_date(renwedate);
+                s1.setExpire_date(exDate);
+                s1.setPrice(cost);
+
+                boolean bl = new TicketDAOImplement().insertTicket2(s1);
+                if (bl) {
+                    JOptionPane.showMessageDialog(this, "Have a nice trip !!!");
+                    ShowTicketSFrame STF1 = new ShowTicketSFrame(BuyTicket1monthFrames.user);
+                    STF1.show();
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Opps Something went wrong !!");
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, error);
+            }
         }
 
 
