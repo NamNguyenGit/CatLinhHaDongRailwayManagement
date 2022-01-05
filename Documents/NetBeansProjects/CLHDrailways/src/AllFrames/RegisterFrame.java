@@ -43,6 +43,10 @@ public class RegisterFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        answertxt = new javax.swing.JTextField();
+        questiontxt = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         password = new javax.swing.JPasswordField();
@@ -64,16 +68,38 @@ public class RegisterFrame extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setLayout(null);
+
+        answertxt.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        jPanel1.add(answertxt);
+        answertxt.setBounds(340, 360, 220, 26);
+
+        questiontxt.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        jPanel1.add(questiontxt);
+        questiontxt.setBounds(340, 290, 220, 26);
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI Black", 3, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Answer");
+        jPanel1.add(jLabel5);
+        jLabel5.setBounds(160, 350, 130, 40);
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 3, 18)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Question");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(160, 280, 130, 40);
+
+        username.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jPanel1.add(username);
-        username.setBounds(340, 300, 220, 22);
+        username.setBounds(340, 190, 220, 26);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 3, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("PASSWORD");
+        jLabel3.setText("Password");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(170, 350, 130, 40);
+        jLabel3.setBounds(160, 220, 130, 40);
         jPanel1.add(password);
-        password.setBounds(340, 360, 220, 22);
+        password.setBounds(340, 230, 220, 22);
 
         jButton1.setBackground(new java.awt.Color(255, 153, 102));
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 3, 18)); // NOI18N
@@ -99,39 +125,47 @@ public class RegisterFrame extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("Name");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(180, 90, 110, 30);
+        jLabel7.setBounds(180, 20, 110, 30);
 
         jLabel8.setFont(new java.awt.Font("Segoe UI Black", 3, 18)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("Date of birth");
         jPanel1.add(jLabel8);
-        jLabel8.setBounds(180, 140, 130, 30);
+        jLabel8.setBounds(180, 60, 130, 30);
 
         jLabel10.setFont(new java.awt.Font("Segoe UI Black", 3, 18)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel10.setText("Phone");
         jPanel1.add(jLabel10);
-        jLabel10.setBounds(180, 240, 110, 20);
+        jLabel10.setBounds(180, 150, 110, 20);
+
+        Phone.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jPanel1.add(Phone);
-        Phone.setBounds(340, 240, 220, 22);
+        Phone.setBounds(340, 150, 220, 26);
+
+        gender.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jPanel1.add(gender);
-        gender.setBounds(340, 190, 220, 22);
+        gender.setBounds(340, 110, 220, 26);
+
+        dob.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jPanel1.add(dob);
-        dob.setBounds(340, 140, 220, 22);
+        dob.setBounds(340, 70, 220, 26);
+
+        Name.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jPanel1.add(Name);
-        Name.setBounds(340, 90, 220, 22);
+        Name.setBounds(340, 30, 220, 26);
 
         jLabel9.setFont(new java.awt.Font("Segoe UI Black", 3, 18)); // NOI18N
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel9.setText("Gender");
         jPanel1.add(jLabel9);
-        jLabel9.setBounds(180, 190, 110, 30);
+        jLabel9.setBounds(180, 100, 110, 30);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 3, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("USERNAME");
+        jLabel2.setText("Username");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(170, 290, 130, 40);
+        jLabel2.setBounds(160, 180, 130, 40);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/1.jpg"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -145,7 +179,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
         );
 
         pack();
@@ -165,6 +199,9 @@ public class RegisterFrame extends javax.swing.JFrame {
         String Phone_user = Phone.getText().trim();
         String Username_user = username.getText().trim();
         String Password_user = password.getText().trim();
+        String Question_user = questiontxt.getText().trim();
+        String Answer_user = answertxt.getText().trim();
+         
 
         String error = "";
 
@@ -187,6 +224,12 @@ public class RegisterFrame extends javax.swing.JFrame {
         if (Password_user.length() == 0) {
             error += "\n Password required";
         }
+        if (Question_user.length() == 0) {
+            error += "\n Username required";
+        }
+        if (Answer_user.length() == 0) {
+            error += "\n Username required";
+        }
 
         if (error.length() == 0) {
             User s1 = new User();
@@ -196,6 +239,8 @@ public class RegisterFrame extends javax.swing.JFrame {
             s1.setPhone(Phone_user);
             s1.setUsername(Username_user);
             s1.setPassword(Password_user);
+            s1.setQuestion(Question_user);
+            s1.setAnswer(Answer_user);
 
             boolean bl = new UserDAOImplement().insertUser(s1);
             if (bl) {
@@ -266,6 +311,7 @@ public class RegisterFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Name;
     private javax.swing.JTextField Phone;
+    private javax.swing.JTextField answertxt;
     private javax.swing.JTextField dob;
     private javax.swing.JTextField gender;
     private javax.swing.JButton jButton1;
@@ -274,11 +320,14 @@ public class RegisterFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField password;
+    private javax.swing.JTextField questiontxt;
     private javax.swing.JTextField username;
     // End of variables declaration//GEN-END:variables
 }

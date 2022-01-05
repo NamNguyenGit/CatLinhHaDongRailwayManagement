@@ -49,6 +49,7 @@ public class ClientLoginFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         username = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         password = new javax.swing.JPasswordField();
@@ -62,6 +63,18 @@ public class ClientLoginFrame extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(852, 500));
 
         jPanel1.setLayout(null);
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("Forgor Password?");
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(380, 330, 190, 20);
         jPanel1.add(username);
         username.setBounds(350, 200, 220, 22);
 
@@ -92,7 +105,7 @@ public class ClientLoginFrame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(320, 380, 140, 40);
+        jButton1.setBounds(320, 390, 140, 40);
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-back-arrow-48.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -168,6 +181,13 @@ public class ClientLoginFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
 
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        // TODO add your handling code here:
+        ForgotPasswordFrame FPF = new ForgotPasswordFrame();
+        FPF.show();
+        dispose();
+    }//GEN-LAST:event_jLabel6MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -210,6 +230,7 @@ public class ClientLoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField password;
     private javax.swing.JTextField username;

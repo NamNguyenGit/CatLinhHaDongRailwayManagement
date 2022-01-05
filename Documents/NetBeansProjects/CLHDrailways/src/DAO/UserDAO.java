@@ -18,6 +18,8 @@ public interface UserDAO {
     public boolean insertUser(User u1);
     public boolean updateRoleUser(User d1,int id);
     public boolean updateInformationUser(User d1,int id);
+    public boolean updatePassword(User d1,int id);
     public List<Ticket> getBuydatebyName(User T1);
+    public User getUserbyPhone(String Phone);
     
 }

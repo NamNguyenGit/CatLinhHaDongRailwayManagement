@@ -51,6 +51,7 @@ public class AdminLoginFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         password = new javax.swing.JPasswordField();
         username = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -72,6 +73,18 @@ public class AdminLoginFrame extends javax.swing.JFrame {
         password.setBounds(280, 280, 190, 22);
         jPanel1.add(username);
         username.setBounds(280, 190, 190, 22);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Forgot Password?");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel2);
+        jLabel2.setBounds(360, 330, 210, 20);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-back-arrow-48.png"))); // NOI18N
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -165,6 +178,13 @@ public class AdminLoginFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel6MouseClicked
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        ForgotPasswordFrame FPFP = new ForgotPasswordFrame();
+        FPFP.show();
+        dispose();
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -203,6 +223,7 @@ public class AdminLoginFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;

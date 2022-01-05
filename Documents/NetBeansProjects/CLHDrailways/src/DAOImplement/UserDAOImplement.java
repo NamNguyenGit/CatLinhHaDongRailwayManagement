@@ -135,13 +135,15 @@ public class UserDAOImplement implements UserDAO{
 
         conn = Database_Connect.getConnection();
         try {
-            ps = conn.prepareStatement("insert into user(name,dob,gender,phone,username,password) values (?,?,?,?,?,?)");
+            ps = conn.prepareStatement("insert into user(name,dob,gender,phone,username,password,question,answer) values (?,?,?,?,?,?,?,?)");
             ps.setString(1,u1.getName());
             ps.setString(2,u1.getDob());
             ps.setString(3,u1.getGender());
             ps.setString(4,u1.getPhone());
             ps.setString(5,u1.getUsername());
             ps.setString(6,u1.getPassword());
+            ps.setString(7,u1.getQuestion());
+            ps.setString(8,u1.getAnswer());
           
 
             int i = ps.executeUpdate();
@@ -267,6 +269,73 @@ public class UserDAOImplement implements UserDAO{
 
 
         return listsTicket;
+    }
+
+    @Override
+    public User getUserbyPhone(String Phone) {
+        User d2 = new User();
+        
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        conn = Database_Connect.getConnection();
+        try {
+            ps = conn.prepareStatement("select * from user where phone = ?");
+            ps.setString(1,Phone);
+            rs = ps.executeQuery();
+            while (rs.next()){
+                User d1 = new User();
+                d1.setId(rs.getInt("Id"));
+                d1.setName(rs.getString("Name"));
+                d1.setQuestion(rs.getString("Question"));
+                d1.setAnswer(rs.getString("Answer"));
+                d2.setId(d1.getId());
+                d2.setName(d1.getName());
+                d2.setQuestion(d1.getQuestion());
+                d2.setAnswer(d1.getAnswer());
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Database_Connect.closeAll(conn,ps,rs);
+        }
+
+       
+        return d2;
+    }
+
+    @Override
+    public boolean updatePassword(User d1, int id) {
+         boolean bl = false;
+
+
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        conn = Database_Connect.getConnection();
+        try {
+            ps = conn.prepareStatement("UPDATE user SET password = ?  WHERE id = ?");
+            ps.setString(1,d1.getPassword());
+            ps.setInt(2,id);
+          
+
+            int i = ps.executeUpdate();
+            if (i>0){
+                bl = true;
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Database_Connect.closeAll(conn,ps,rs);
+        }
+
+
+        return bl;
     }
  
 }
