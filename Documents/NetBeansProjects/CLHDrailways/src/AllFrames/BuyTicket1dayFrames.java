@@ -299,7 +299,7 @@ public class BuyTicket1dayFrames extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-        ShowTicketSFrame STF1day = new ShowTicketSFrame(BuyTicket1dayFrames.user);
+        ShowTicketS1dayFrame STF1day = new ShowTicketS1dayFrame(BuyTicket1dayFrames.user);
         STF1day.show();
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked

@@ -23,6 +23,9 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 import DAOImplement.ScheduleDAOimplement;
+import java.awt.Font;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 /**
  *
  * @author acer
@@ -83,7 +86,7 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
         timer.setInitialDelay(0);
         timer.start();
         
-        
+        headertable();
         
         
         
@@ -206,7 +209,7 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 1230, 590));
@@ -224,11 +227,30 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    private void headertable(){
+        JTableHeader thead = TableSchedule.getTableHeader();
+        
+        thead.setFont(new Font("Tahome", Font.BOLD,14));
+     
+        TableColumn col1 = TableSchedule.getColumnModel().getColumn(0);
+        col1.setPreferredWidth(80);
+        TableColumn col2 = TableSchedule.getColumnModel().getColumn(1);
+        col2.setPreferredWidth(120);
+        TableColumn col3 = TableSchedule.getColumnModel().getColumn(2);
+        col3.setPreferredWidth(230);
+        TableColumn col4 = TableSchedule.getColumnModel().getColumn(3);
+        col4.setPreferredWidth(110);
+        TableColumn col5 = TableSchedule.getColumnModel().getColumn(4);
+        col5.setPreferredWidth(110);
+        TableColumn col6 = TableSchedule.getColumnModel().getColumn(5);
+        col6.setPreferredWidth(116);
+        TableColumn col7 = TableSchedule.getColumnModel().getColumn(6);
+        col7.setPreferredWidth(116);
+    }   
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
         // TODO add your handling code here:
-        ChooseTicketFrame CTF = new ChooseTicketFrame(ShowTicketSFrame.user);
-        CTF.show();
+        ChooseTicketFrame CTF2 = new ChooseTicketFrame(ShowTicketSFrame.user);
+        CTF2.show();
         dispose();
     }//GEN-LAST:event_jLabel3MouseClicked
 
