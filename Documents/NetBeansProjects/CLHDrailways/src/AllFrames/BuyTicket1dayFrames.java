@@ -22,29 +22,29 @@ import java.util.Date;
  *
  * @author acer
  */
-public class BuyTicketFrames extends javax.swing.JFrame {
+public class BuyTicket1dayFrames extends javax.swing.JFrame {
 
     /**
-     * Creates new form BuyTicketFrames
+     * Creates new form BuyTicket1dayFrames
      */
     private static User user;
     private static Date Expire_date;
-    public BuyTicketFrames(java.util.Date Expire_date,User user) {
-        BuyTicketFrames.Expire_date = (Date) Expire_date;
-        BuyTicketFrames.user = user;
+    public BuyTicket1dayFrames(java.util.Date Expire_date,User user) {
+        BuyTicket1dayFrames.Expire_date = (Date) Expire_date;
+        BuyTicket1dayFrames.user = user;
         try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(BuyTicketFrames.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BuyTicket1dayFrames.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
         setLocationRelativeTo(null);
         
-        name.setText(BuyTicketFrames.user.getName());
+        name.setText(BuyTicket1dayFrames.user.getName());
         renewdate.setText(null);
        
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String date = dateFormat.format(BuyTicketFrames.Expire_date);
+        String date = dateFormat.format(BuyTicket1dayFrames.Expire_date);
         datebuy.setText(date);
         ExDate.setText(date);
         price.setText("30.000");
@@ -86,7 +86,6 @@ public class BuyTicketFrames extends javax.swing.JFrame {
         datebuy = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1230, 800));
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -300,8 +299,8 @@ public class BuyTicketFrames extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-        ShowTicketSFrame STF = new ShowTicketSFrame(BuyTicketFrames.user);
-        STF.show();
+        ShowTicketSFrame STF1day = new ShowTicketSFrame(BuyTicket1dayFrames.user);
+        STF1day.show();
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
 
@@ -357,8 +356,8 @@ public class BuyTicketFrames extends javax.swing.JFrame {
       
         if (error.length() == 0) {
             Ticket s1 = new Ticket();
-            s1.setUser_id(BuyTicketFrames.user.getId());
-            
+            s1.setUser_id(BuyTicket1dayFrames.user.getId());
+            s1.setDate_buy(perchasedate);
             s1.setExpire_date(exDate);
             s1.setPrice(cost);
            
@@ -368,7 +367,7 @@ public class BuyTicketFrames extends javax.swing.JFrame {
             if (bl) {
                
                 JOptionPane.showMessageDialog(this, "Have a nice trip !!!");
-                ShowTicketS1dayFrame STF = new ShowTicketS1dayFrame(BuyTicketFrames.user);
+                ShowTicketS1dayFrame STF = new ShowTicketS1dayFrame(BuyTicket1dayFrames.user);
                 STF.show();
                 dispose();
             } else {
@@ -399,20 +398,21 @@ public class BuyTicketFrames extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BuyTicketFrames.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuyTicket1dayFrames.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BuyTicketFrames.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuyTicket1dayFrames.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BuyTicketFrames.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuyTicket1dayFrames.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuyTicketFrames.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuyTicket1dayFrames.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BuyTicketFrames(BuyTicketFrames.Expire_date,BuyTicketFrames.user).setVisible(true);
+                new BuyTicket1dayFrames(BuyTicket1dayFrames.Expire_date,BuyTicket1dayFrames.user).setVisible(true);
             }
         });
     }

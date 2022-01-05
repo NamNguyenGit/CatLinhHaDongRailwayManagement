@@ -239,7 +239,7 @@ public class ShowTicketSFrame extends javax.swing.JFrame {
         int train_id = Integer.parseInt(Train_id);
         Date Expire_date = new ScheduleDAOimplement().getDateBuybyTrainID(train_id);
        
-        BuyTicketFrames2 BTF2 = new BuyTicketFrames2(Expire_date,ShowTicketSFrame.user);
+        BuyTicket1monthFrames BTF2 = new BuyTicket1monthFrames(Expire_date,ShowTicketSFrame.user);
         BTF2.show();
         dispose();
     }//GEN-LAST:event_TableScheduleMouseClicked

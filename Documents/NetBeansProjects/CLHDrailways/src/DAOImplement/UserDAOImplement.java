@@ -6,11 +6,13 @@
 package DAOImplement;
 import DAO.UserDAO;
 import Database.Database_Connect;
+import Entities.Ticket;
 import Entities.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -193,6 +195,45 @@ public class UserDAOImplement implements UserDAO{
 
         return bl;
     }
+
+    @Override
+    public List<Ticket> getTicketbyUserid(User d1) {
+        List<Ticket> listTicket = new ArrayList<>();
+
+
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        conn = Database_Connect.getConnection();
+        ;
+        try {
+            ps = conn.prepareStatement("select * from ticket where user_id = ?");
+            ps.setInt(1,d1.getId());
+            rs = ps.executeQuery();
+            while (rs.next()){
+                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+                Ticket T1 = new Ticket();
+                T1.setId(rs.getInt("ID"));
+                T1.setUser_id(rs.getInt("User_id"));
+                T1.setDate_buy(rs.getDate("Buydate"));
+                T1.setRenew_date(rs.getDate("Renewabledate"));
+                T1.setExpire_date(rs.getDate("Expirationdate"));
+                T1.setPrice(rs.getFloat("Price"));
+                listTicket.add(T1);
+                
+                
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Database_Connect.closeAll(conn,ps,rs);
+        }
+
+
+        return listTicket;
+    }
+    
 
     
     

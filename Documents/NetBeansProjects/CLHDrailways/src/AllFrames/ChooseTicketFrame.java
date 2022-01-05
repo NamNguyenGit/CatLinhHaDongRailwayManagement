@@ -32,7 +32,7 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
-        Name_username.setText("Please Choose your tickets " + ChooseTicketFrame.user.getName());
+        
     }
 
     /**
@@ -109,7 +109,7 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 815, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

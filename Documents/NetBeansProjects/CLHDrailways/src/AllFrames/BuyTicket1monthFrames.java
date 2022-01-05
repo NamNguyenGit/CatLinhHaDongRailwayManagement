@@ -23,29 +23,29 @@ import java.util.Date;
  *
  * @author acer
  */
-public class BuyTicketFrames2 extends javax.swing.JFrame {
+public class BuyTicket1monthFrames extends javax.swing.JFrame {
 
     /**
      * Creates new form BuyTicketFrames
      */
     private static User user;
     private static Date Expire_date;
-    public BuyTicketFrames2(java.util.Date Expire_date,User user) {
-        BuyTicketFrames2.Expire_date = (Date) Expire_date;
-        BuyTicketFrames2.user = user;
+    public BuyTicket1monthFrames(java.util.Date Expire_date,User user) {
+        BuyTicket1monthFrames.Expire_date = (Date) Expire_date;
+        BuyTicket1monthFrames.user = user;
         try {
             UIManager.setLookAndFeel(new WindowsLookAndFeel());
         } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(BuyTicketFrames2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(BuyTicket1monthFrames.class.getName()).log(Level.SEVERE, null, ex);
         }
         initComponents();
         setLocationRelativeTo(null);
         
-        name.setText(BuyTicketFrames2.user.getName());
+        name.setText(BuyTicket1monthFrames.user.getName());
         renewdatetxt.setText(null);
        
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        String date = dateFormat.format(BuyTicketFrames2.Expire_date);
+        String date = dateFormat.format(BuyTicket1monthFrames.Expire_date);
        
         
         Calendar cal = Calendar.getInstance();
@@ -320,7 +320,7 @@ public class BuyTicketFrames2 extends javax.swing.JFrame {
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
-        ShowTicketSFrame STF = new ShowTicketSFrame(BuyTicketFrames2.user);
+        ShowTicketSFrame STF = new ShowTicketSFrame(BuyTicket1monthFrames.user);
         STF.show();
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
@@ -388,7 +388,8 @@ public class BuyTicketFrames2 extends javax.swing.JFrame {
       
         if (error.length() == 0) {
             Ticket s1 = new Ticket();
-            s1.setUser_id(BuyTicketFrames2.user.getId());
+            s1.setUser_id(BuyTicket1monthFrames.user.getId());
+            s1.setDate_buy(perchasedate);
             s1.setRenew_date(renwedate);
             s1.setExpire_date(exDate);
             s1.setPrice(cost);
@@ -398,7 +399,7 @@ public class BuyTicketFrames2 extends javax.swing.JFrame {
             boolean bl = new TicketDAOImplement().insertTicket2(s1);
             if (bl) {
                 JOptionPane.showMessageDialog(this, "Have a nice trip !!!");
-                ShowTicketSFrame STF1 = new ShowTicketSFrame(BuyTicketFrames2.user);
+                ShowTicketSFrame STF1 = new ShowTicketSFrame(BuyTicket1monthFrames.user);
                 STF1.show();
                 dispose();
             } else {
@@ -429,21 +430,23 @@ public class BuyTicketFrames2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BuyTicketFrames2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuyTicket1monthFrames.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BuyTicketFrames2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuyTicket1monthFrames.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BuyTicketFrames2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuyTicket1monthFrames.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BuyTicketFrames2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BuyTicket1monthFrames.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BuyTicketFrames2(BuyTicketFrames2.Expire_date,BuyTicketFrames2.user).setVisible(true);
+                new BuyTicket1monthFrames(BuyTicket1monthFrames.Expire_date,BuyTicket1monthFrames.user).setVisible(true);
             }
         });
     }

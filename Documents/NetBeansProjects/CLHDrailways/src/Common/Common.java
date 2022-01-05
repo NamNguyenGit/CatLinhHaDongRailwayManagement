@@ -20,7 +20,7 @@ import java.util.logging.SimpleFormatter;
 public class Common {
     public static String formatNumber(double number){
         NumberFormat nf = NumberFormat.getNumberInstance();
-        return nf.format(number);
+        return nf.format(number) + " VNĐ";
         
     }
     
