@@ -75,8 +75,10 @@ public class ClientLoginFrame extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel6);
         jLabel6.setBounds(380, 330, 190, 20);
+
+        username.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jPanel1.add(username);
-        username.setBounds(350, 200, 220, 22);
+        username.setBounds(350, 200, 220, 26);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Black", 3, 18)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

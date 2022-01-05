@@ -38,7 +38,7 @@ public class UserDAOImplement implements UserDAO{
                 U1.setId(rs.getInt("ID"));
                 U1.setName(rs.getString("Name"));
                 U1.setDob(rs.getString("dob"));
-                U1.setGender(rs.getString("gender"));
+                U1.setGender(rs.getInt("gender"));
                 U1.setPhone(rs.getString("phone"));
                 U1.setRole(rs.getInt("Role"));
                 U1.setUsername(rs.getString("Username"));
@@ -76,7 +76,7 @@ public class UserDAOImplement implements UserDAO{
                 d1.setId(rs.getInt("ID"));
                 d1.setName(rs.getString("Name"));
                 d1.setDob(rs.getString("dob"));
-                d1.setGender(rs.getString("gender"));
+                d1.setGender(rs.getInt("gender"));
                 d1.setPhone(rs.getString("phone"));
                 d1.setRole(rs.getInt("Role"));
                 d1.setUsername(rs.getString("Username"));
@@ -138,7 +138,7 @@ public class UserDAOImplement implements UserDAO{
             ps = conn.prepareStatement("insert into user(name,dob,gender,phone,username,password,question,answer) values (?,?,?,?,?,?,?,?)");
             ps.setString(1,u1.getName());
             ps.setString(2,u1.getDob());
-            ps.setString(3,u1.getGender());
+            ps.setInt(3,u1.getGender());
             ps.setString(4,u1.getPhone());
             ps.setString(5,u1.getUsername());
             ps.setString(6,u1.getPassword());
@@ -175,7 +175,7 @@ public class UserDAOImplement implements UserDAO{
             ps = conn.prepareStatement("UPDATE user SET name = ?, dob = ? , gender = ? , phone = ? , username = ?  WHERE id = ?");
             ps.setString(1,d1.getName());
             ps.setString(2,d1.getDob());
-            ps.setString(3,d1.getGender());
+            ps.setInt(3,d1.getGender());
             ps.setString(4,d1.getPhone());
             ps.setString(5,d1.getUsername());
             

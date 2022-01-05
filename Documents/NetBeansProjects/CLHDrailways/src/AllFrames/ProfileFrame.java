@@ -34,11 +34,11 @@ public class ProfileFrame extends javax.swing.JFrame {
         }
         initComponents();
         setLocationRelativeTo(null);
-
+        
         iduser.setText(user.getId() + "");
         nameuser.setText(user.getName());
         birthdayuser.setText(user.getDob());
-        genderuser.setText(user.getGender());
+        genderuser.setText(user.getGender() == 1 ? "Male" : "Female");
         phoneuser.setText(user.getPhone());
         String role = null;
         if (user.getRole() == 1) {
@@ -77,7 +77,6 @@ public class ProfileFrame extends javax.swing.JFrame {
         iduser = new javax.swing.JTextField();
         nameuser = new javax.swing.JTextField();
         birthdayuser = new javax.swing.JTextField();
-        genderuser = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         phoneuser = new javax.swing.JTextField();
@@ -92,6 +91,7 @@ public class ProfileFrame extends javax.swing.JFrame {
         passworduser = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        genderuser = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(799, 535));
@@ -206,9 +206,6 @@ public class ProfileFrame extends javax.swing.JFrame {
         birthdayuser.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         birthdayuser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        genderuser.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
-        genderuser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         jLabel6.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("PHONE");
@@ -299,6 +296,10 @@ public class ProfileFrame extends javax.swing.JFrame {
             }
         });
 
+        genderuser.setEditable(false);
+        genderuser.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        genderuser.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -316,8 +317,8 @@ public class ProfileFrame extends javax.swing.JFrame {
                     .addComponent(iduser)
                     .addComponent(nameuser)
                     .addComponent(birthdayuser)
-                    .addComponent(genderuser)
-                    .addComponent(phoneuser, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
+                    .addComponent(phoneuser, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(genderuser))
                 .addGap(44, 44, 44)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -358,8 +359,8 @@ public class ProfileFrame extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(genderuser)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(genderuser))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -409,8 +410,14 @@ public class ProfileFrame extends javax.swing.JFrame {
         if (Dob_user.length() == 0) {
             error += "\n Birthday required";
         }
+        int gender = 0;
         if (Gender_user.length() == 0) {
             error += "\n Gender required";
+        }
+        else if (Gender_user == "Male") {
+            gender = 1;
+        }else{
+            gender = 2;
         }
         if (Phone_user.length() == 0) {
             error += "\n Phone required";
@@ -418,18 +425,21 @@ public class ProfileFrame extends javax.swing.JFrame {
         if (Username_user.length() == 0) {
             error += "\n Username required";
         }
+        
+        
 
         if (error.length() == 0) {
             User s1 = new User();
+            
             s1.setName(Name_user);
             s1.setDob(Dob_user);
-            s1.setGender(Gender_user);
+            s1.setGender(gender);
             s1.setPhone(Phone_user);
             s1.setUsername(Username_user);
 
             boolean bl = new UserDAOImplement().updateInformationUser(s1, user.getId());
             if (bl) {
-                JOptionPane.showMessageDialog(null, "Hello new guy!!");
+                JOptionPane.showMessageDialog(null, "Hello new member!!");
             } else {
                 JOptionPane.showMessageDialog(null, "You still not change anything!!");
             }

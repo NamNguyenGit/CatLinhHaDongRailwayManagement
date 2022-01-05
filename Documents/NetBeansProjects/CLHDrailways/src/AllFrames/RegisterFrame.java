@@ -43,6 +43,7 @@ public class RegisterFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        gender = new javax.swing.JComboBox<>();
         answertxt = new javax.swing.JTextField();
         questiontxt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -56,7 +57,6 @@ public class RegisterFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         Phone = new javax.swing.JTextField();
-        gender = new javax.swing.JTextField();
         dob = new javax.swing.JTextField();
         Name = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -68,6 +68,10 @@ public class RegisterFrame extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setLayout(null);
+
+        gender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Other" }));
+        jPanel1.add(gender);
+        gender.setBounds(340, 110, 220, 22);
 
         answertxt.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jPanel1.add(answertxt);
@@ -143,10 +147,6 @@ public class RegisterFrame extends javax.swing.JFrame {
         jPanel1.add(Phone);
         Phone.setBounds(340, 150, 220, 26);
 
-        gender.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
-        jPanel1.add(gender);
-        gender.setBounds(340, 110, 220, 26);
-
         dob.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jPanel1.add(dob);
         dob.setBounds(340, 70, 220, 26);
@@ -179,7 +179,7 @@ public class RegisterFrame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 483, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
         );
 
         pack();
@@ -195,7 +195,7 @@ public class RegisterFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         String Name_user = Name.getText().trim();
         String dateofbirth = dob.getText().trim();
-        String Gender_user = gender.getText().trim();
+        String Gender_user = (String) gender.getSelectedItem();
         String Phone_user = Phone.getText().trim();
         String Username_user = username.getText().trim();
         String Password_user = password.getText().trim();
@@ -212,8 +212,14 @@ public class RegisterFrame extends javax.swing.JFrame {
         if (dateofbirth.length() == 0) {
             error += "\n Date of birth required";
         }
-        if (Gender_user.length() == 0) {
-            error += "\n Gender required";
+        
+        int genderuser = 0;
+        if(gender.getSelectedItem()=="Male"){
+            genderuser = 1;
+        }else if(gender.getSelectedItem()=="Female"){
+            genderuser = 2;
+        }else{
+            genderuser = 3;
         }
         if (Phone_user.length() == 0) {
             error += "\n Phone  required";
@@ -235,7 +241,7 @@ public class RegisterFrame extends javax.swing.JFrame {
             User s1 = new User();
             s1.setName(Name_user);
             s1.setDob(dateofbirth);
-            s1.setGender(Gender_user);
+            s1.setGender(genderuser);
             s1.setPhone(Phone_user);
             s1.setUsername(Username_user);
             s1.setPassword(Password_user);
@@ -248,7 +254,7 @@ public class RegisterFrame extends javax.swing.JFrame {
 
                 Name.setText(null);
                 dob.setText(null);
-                gender.setText(null);
+                gender.setSelectedIndex(0);
                 Phone.setText(null);
                 username.setText(null);
                 password.setText(null);
@@ -261,7 +267,7 @@ public class RegisterFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Opps something went wrong !!");
                 Name.setText(null);
                 dob.setText(null);
-                gender.setText(null);
+                gender.setSelectedIndex(0);
                 Phone.setText(null);
                 username.setText(null);
                 password.setText(null);
@@ -313,7 +319,7 @@ public class RegisterFrame extends javax.swing.JFrame {
     private javax.swing.JTextField Phone;
     private javax.swing.JTextField answertxt;
     private javax.swing.JTextField dob;
-    private javax.swing.JTextField gender;
+    private javax.swing.JComboBox<String> gender;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

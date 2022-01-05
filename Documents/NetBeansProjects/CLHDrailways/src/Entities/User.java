@@ -13,7 +13,7 @@ public class User {
     private int Id ;
     private String Name;
     private String Dob;
-    private String Gender;
+    private int Gender;
     private String Phone;
     private int Role;
     private String Username;
@@ -24,7 +24,7 @@ public class User {
     public User() {
     }
 
-    public User(int Id, String Name, String Dob, String Gender, String Phone, int Role, String Username, String Password, String Question, String Answer) {
+    public User(int Id, String Name, String Dob, int Gender, String Phone, int Role, String Username, String Password, String Question, String Answer) {
         this.Id = Id;
         this.Name = Name;
         this.Dob = Dob;
@@ -63,11 +63,11 @@ public class User {
         this.Dob = Dob;
     }
 
-    public String getGender() {
+    public int getGender() {
         return Gender;
     }
 
-    public void setGender(String Gender) {
+    public void setGender(int Gender) {
         this.Gender = Gender;
     }
 
@@ -119,10 +119,7 @@ public class User {
         this.Answer = Answer;
     }
 
-    @Override
-    public String toString() {
-        return "User{" + "Id=" + Id + ", Name=" + Name + ", Dob=" + Dob + ", Gender=" + Gender + ", Phone=" + Phone + ", Role=" + Role + ", Username=" + Username + ", Password=" + Password + ", Question=" + Question + ", Answer=" + Answer + '}';
-    }
+    
     
     
 
