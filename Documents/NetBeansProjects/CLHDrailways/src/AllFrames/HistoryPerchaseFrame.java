@@ -68,9 +68,8 @@ public class HistoryPerchaseFrame extends javax.swing.JFrame {
         for (Ticket S1: listTicket ){
             String name = user.getName();
             S1.setUser_name(name);
-             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-            Object[] data = {S1.getId(),S1.getUser_name(),S1.getRenew_date(),df.format(S1.getDate_buy()),df.format(S1.getExpire_date()),Common.formatNumber(S1.getPrice())};
-            System.out.println(S1.getRenew_date());
+            SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+            Object[] data = {S1.getId(),S1.getUser_name(),S1.getRenew_date() == null ? "Daily Ticket" : df.format(S1.getRenew_date()),df.format(S1.getDate_buy()),df.format(S1.getExpire_date()),Common.formatNumber(S1.getPrice())};
             defaultTableModel.addRow(data);
         }
         

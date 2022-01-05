@@ -41,7 +41,7 @@ public class BuyTicket1dayFrames extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         
         name.setText(BuyTicket1dayFrames.user.getName());
-        renewdate.setText(null);
+        renewdate.setText("Daily Ticket Doesn't Have Renew Date");
        
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String date = dateFormat.format(BuyTicket1dayFrames.Expire_date);
