@@ -92,7 +92,7 @@ public class UserDAOImplement implements UserDAO{
     }
 
     @Override
-    public boolean updateUser(User d1,int id) {
+    public boolean updateRoleUser(User d1,int id) {
         boolean bl = false;
 
 
@@ -153,6 +153,43 @@ public class UserDAOImplement implements UserDAO{
         } finally {
             Database_Connect.closeAll(conn,ps,rs);
         }
+
+        return bl;
+    }
+
+    @Override
+    public boolean updateInformationUser(User d1, int id) {
+        boolean bl = false;
+
+
+        Connection conn;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        conn = Database_Connect.getConnection();
+        try {
+            ps = conn.prepareStatement("UPDATE user SET name = ?, dob = ? , gender = ? , phone = ? , username = ?  WHERE id = ?");
+            ps.setString(1,d1.getName());
+            ps.setString(2,d1.getDob());
+            ps.setString(3,d1.getGender());
+            ps.setString(4,d1.getPhone());
+            ps.setString(5,d1.getUsername());
+            
+            ps.setInt(6,id);
+          
+
+            int i = ps.executeUpdate();
+            if (i>0){
+                bl = true;
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            Database_Connect.closeAll(conn,ps,rs);
+        }
+
 
         return bl;
     }

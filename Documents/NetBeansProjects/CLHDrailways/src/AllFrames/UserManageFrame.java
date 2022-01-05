@@ -560,7 +560,7 @@ public class UserManageFrame extends javax.swing.JFrame {
             s1.setUsername(Username_user);
             
             
-            boolean bl = new UserDAOImplement().updateUser(s1,IDS);
+            boolean bl = new UserDAOImplement().updateRoleUser(s1,IDS);
             if (bl){
                 JOptionPane.showMessageDialog(null, "Update successful");
                 btn_listall.doClick();

@@ -48,11 +48,12 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
         Name_username = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 450));
+        setPreferredSize(new java.awt.Dimension(815, 450));
 
         jPanel1.setLayout(null);
 
@@ -69,7 +70,7 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(610, 180, 160, 50);
+        jButton1.setBounds(500, 170, 160, 50);
 
         jButton2.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
         jButton2.setText("Daily Tickets");
@@ -79,7 +80,17 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(430, 180, 140, 50);
+        jButton2.setBounds(350, 170, 140, 50);
+
+        jButton3.setFont(new java.awt.Font("Segoe UI Black", 3, 14)); // NOI18N
+        jButton3.setText("Profile");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jButton3);
+        jButton3.setBounds(670, 170, 120, 50);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8-back-arrow-48.png"))); // NOI18N
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -129,6 +140,13 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ProfileFrame PF = new ProfileFrame(ChooseTicketFrame.user);
+        PF.show();
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -168,6 +186,7 @@ public class ChooseTicketFrame extends javax.swing.JFrame {
     private javax.swing.JLabel Name_username;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
