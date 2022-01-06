@@ -69,7 +69,7 @@ public class RegisterFrame extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
-        gender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", "Other" }));
+        gender.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Male", "Female", " " }));
         jPanel1.add(gender);
         gender.setBounds(340, 110, 220, 22);
 
@@ -216,11 +216,9 @@ public class RegisterFrame extends javax.swing.JFrame {
         int genderuser = 0;
         if(gender.getSelectedItem()=="Male"){
             genderuser = 1;
-        }else if(gender.getSelectedItem()=="Female"){
+        }else 
             genderuser = 2;
-        }else{
-            genderuser = 3;
-        }
+        
         if (Phone_user.length() == 0) {
             error += "\n Phone  required";
         }

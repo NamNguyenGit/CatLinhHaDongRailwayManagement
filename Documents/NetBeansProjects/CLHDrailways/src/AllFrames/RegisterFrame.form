@@ -49,7 +49,7 @@
               <StringArray count="3">
                 <StringItem index="0" value="Male"/>
                 <StringItem index="1" value="Female"/>
-                <StringItem index="2" value="Other"/>
+                <StringItem index="2" value=" "/>
               </StringArray>
             </Property>
           </Properties>
