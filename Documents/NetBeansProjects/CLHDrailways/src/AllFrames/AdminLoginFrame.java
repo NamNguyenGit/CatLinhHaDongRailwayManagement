@@ -145,8 +145,14 @@ public class AdminLoginFrame extends javax.swing.JFrame {
 
         String user = username.getText();
         String pass = password.getText();
-
-        try {
+        
+        
+        if(user.length()==0 || user == null){
+            JOptionPane.showMessageDialog(this, "Username Required");
+        } else if(pass.length()==0 || pass == null){
+             JOptionPane.showMessageDialog(this, "Password Required");
+        }else{
+           try {
             Statement stm = conn.createStatement();
             String sql = "select * from user where role = 1 and username ='" + user + "' and password = '" + pass + "' ";
             ResultSet rs = stm.executeQuery(sql);
@@ -163,7 +169,10 @@ public class AdminLoginFrame extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(AdminLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } 
         }
+
+        
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

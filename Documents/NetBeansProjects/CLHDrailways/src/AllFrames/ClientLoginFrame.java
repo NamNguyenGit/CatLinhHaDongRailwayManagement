@@ -156,6 +156,11 @@ public class ClientLoginFrame extends javax.swing.JFrame {
         String user = username.getText();
         String pass = password.getText();
 
+        if(user.length()==0 || user == null){
+            JOptionPane.showMessageDialog(this, "Username Required");
+        } else if(pass.length()==0 || pass == null){
+             JOptionPane.showMessageDialog(this, "Password Required");
+        }else{
         try {
             Statement stm = conn.createStatement();
             String sql = "select * from user where username ='" + user + "' and password = '" + pass + "' ";
@@ -173,6 +178,7 @@ public class ClientLoginFrame extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(AdminLoginFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
